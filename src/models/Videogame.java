@@ -5,6 +5,7 @@ import org.json.simple.JSONObject;
 import java.util.ArrayList;
 
 public class Videogame {
+    private String id;
     private String name;
     private String tag;
     private String devs;
@@ -24,6 +25,7 @@ public class Videogame {
     }
 
     public Videogame(JSONObject videomageJSON){
+        this.id = (String) videomageJSON.get("_id");
         this.name = (String) videomageJSON.get("name");
         this.tag = (String) videomageJSON.get("tag");
         this.devs = (String) videomageJSON.get("devs");
@@ -45,6 +47,14 @@ public class Videogame {
         result.put("description", this.description);
         result.put("bills", this.bills);
         return result;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getName() {

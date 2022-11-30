@@ -9,6 +9,7 @@ public class Admin extends User{
     }
 
     public Admin(JSONObject adminJSON){
+        this.id = (String) adminJSON.get("_id");
         this.username = (String) adminJSON.get("username");
         this.password = (String) adminJSON.get("password");
     }

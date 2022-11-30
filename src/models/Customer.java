@@ -31,6 +31,7 @@ public class Customer extends User{
     }
 
     public Customer(JSONObject customerJSON){
+        this.id = (String) customerJSON.get("_id");
         this.username = (String) customerJSON.get("username");
         this.password = (String) customerJSON.get("password");
         this.name = (String) customerJSON.get("name");

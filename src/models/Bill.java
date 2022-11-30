@@ -4,6 +4,7 @@ package models;
 import org.json.simple.JSONObject;
 
 public class Bill {
+    private String id;
     private String date;
     private Customer customer;
     private Videogame videogame;
@@ -15,6 +16,7 @@ public class Bill {
     }
 
     public Bill(JSONObject billJSON){
+        this.id = (String)billJSON.get("_id");
         this.date = (String) billJSON.get("date");
         this.customer = new Customer((JSONObject) billJSON.get("customer"));
         this.videogame = new Videogame((JSONObject) billJSON.get("videogame"));

@@ -3,6 +3,7 @@ package models;
 import org.json.simple.JSONObject;
 
 public class Message {
+    private String id;
     private String date;
     private Customer customer;
 
@@ -12,6 +13,7 @@ public class Message {
     }
 
     public Message(JSONObject messageJSON){
+        this.id = (String) messageJSON.get("_id");
         this.date = (String) messageJSON.get("date");
         this.customer = new Customer((JSONObject) messageJSON.get("customer"));
     }
@@ -23,6 +25,14 @@ public class Message {
         result.put("date", this.date);
         result.put("customer", this.customer.toJSON());
         return  result;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getDate() {

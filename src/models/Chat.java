@@ -5,6 +5,7 @@ import org.json.simple.JSONObject;
 import java.util.ArrayList;
 
 public class Chat {
+    private String id;
     private Customer customer1;
     private Customer customer2;
     private ArrayList<Message> messages;
@@ -16,6 +17,7 @@ public class Chat {
     }
 
     public Chat(JSONObject chatJSON){
+        this.id = (String) chatJSON.get("_id");
         this.customer1 = new Customer((JSONObject) chatJSON.get("customer1"));
         this.customer2 = new Customer((JSONObject) chatJSON.get("customer2"));
         this.messages = new ArrayList<>();
@@ -28,6 +30,14 @@ public class Chat {
         result.put("customer1", this.customer1.toJSON());
         result.put("customer2", this.customer2.toJSON());
         return  result;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public Customer getCustomer1() {
