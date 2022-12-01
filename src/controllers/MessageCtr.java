@@ -12,7 +12,7 @@ public class MessageCtr {
     Service service;
 
     public MessageCtr(){
-        this.service = new Service("http://localhost:8080/");
+
     }
 
     public Message get(String id){
@@ -39,5 +39,9 @@ public class MessageCtr {
     public boolean delet(String id){
         String response = service.DELETE("messages/" + id);
         return response == "";
+    }
+
+    public void setService(Service service){
+        this.service = service;
     }
 }

@@ -10,7 +10,6 @@ public class BillCtr {
     Service service;
 
     public BillCtr(){
-        this.service = new Service("http://localhost:8080/");
     }
 
     public Bill get(String id){
@@ -37,5 +36,9 @@ public class BillCtr {
     public boolean delet(String id){
         String response = service.DELETE("bills/" + id);
         return response == "";
+    }
+
+    public void setService(Service service){
+        this.service = service;
     }
 }

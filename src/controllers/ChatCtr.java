@@ -11,7 +11,7 @@ public class ChatCtr {
     Service service;
 
     public ChatCtr(){
-        this.service = new Service("http://localhost:8080/");
+
     }
 
     public Chat get(String id){
@@ -38,5 +38,9 @@ public class ChatCtr {
     public boolean delet(String id){
         String response = service.DELETE("chats/" + id);
         return response == "";
+    }
+
+    public void setService(Service service){
+        this.service = service;
     }
 }

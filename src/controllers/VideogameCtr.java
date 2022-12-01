@@ -11,7 +11,7 @@ public class VideogameCtr {
     Service service;
 
     public VideogameCtr(){
-        this.service = new Service("http://localhost:8080/");
+
     }
 
     public Videogame get(String id){
@@ -51,5 +51,9 @@ public class VideogameCtr {
     public boolean delet(String id){
         String response = service.DELETE("videogames/" + id);
         return response == "";
+    }
+
+    public void setService(Service service){
+        this.service = service;
     }
 }

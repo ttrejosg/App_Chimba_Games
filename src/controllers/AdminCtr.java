@@ -13,7 +13,7 @@ public class AdminCtr {
     Service service;
 
     public AdminCtr(){
-        this.service = new Service("http://localhost:8080/");
+
     }
 
     public ArrayList<Admin> getAll(){
@@ -30,5 +30,9 @@ public class AdminCtr {
         JSONObject response = service.GET("admins/" + id);
         if(response != null) return new Admin(response);
         else return null;
+    }
+
+    public void setService(Service service){
+        this.service = service;
     }
 }

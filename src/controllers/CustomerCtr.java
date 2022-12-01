@@ -1,23 +1,37 @@
 package controllers;
 
+import models.Admin;
 import models.Customer;
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import services.Service;
+
+import java.util.ArrayList;
 
 public class CustomerCtr {
 
     Service service;
 
     public CustomerCtr(){
-        this.service = new Service("http://localhost:8080/");
+
     }
 
     public Customer get(String id){
         JSONObject response = service.GET("customers/" + id);
         if(response != null) return new Customer(response);
         else return null;
+    }
+
+    public ArrayList<Customer> getAll(){
+        JSONArray response = service.GET_ALL("customers");
+        ArrayList<Customer> customers= new ArrayList<>();
+        for (Object customer : response) {
+            Customer newCustomer = new Customer((JSONObject) customer);
+            customers.add(newCustomer);
+        }
+        return customers;
     }
 
     public boolean create(Customer customer){
@@ -65,5 +79,9 @@ public class CustomerCtr {
     public boolean delet(String id){
         String response = service.DELETE("customers/" + id);
         return response == "";
+    }
+
+    public void setService(Service service){
+        this.service = service;
     }
 }
