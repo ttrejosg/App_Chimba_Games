@@ -21,7 +21,7 @@ import services.Service;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class ControllerLogin {
+public class Login {
     private Service service;
     private AdminCtr adminCtr;
     private CustomerCtr customerCtr;
@@ -33,45 +33,49 @@ public class ControllerLogin {
     @FXML
     private TextField upUserName, upPassword, upName, upLastname, upCellphone, upEmail, upAge, upDescription;
     @FXML
-    private Pane logIn, singUp;
+    private Pane logIn, singUp, forgotPassword;
     @FXML
     AnchorPane scenePane;
 
-    public ControllerLogin(){
+    public Login(){
         this.adminCtr = new AdminCtr();
         this.customerCtr = new CustomerCtr();
     }
 
     public void validateLogIn(ActionEvent event) throws IOException {
+        boolean found = false;
         String id = this.inUserName.getText();
         String password = this.inPassword.getText();
         ArrayList<Admin> admins = this.adminCtr.getAll();
         for(Admin admin: admins){
             if(password.equals(admin.getPassword()) && id.equals(admin.getUsername())){
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("admin.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("AdminView.fxml"));
                 Parent root = loader.load();
-                ControllerLogin controllerLogin = loader.getController();
-                controllerLogin.setService(this.service);
+                AdminView adminView = loader.getController();
+                adminView.setService(this.service);
                 stage = (Stage)((Node)event.getSource()).getScene().getWindow();
                 scene = new Scene(root);
                 stage.setScene(scene);
                 stage.show();
+                found = true;
+            }
+        }
+        if(!found){
+            ArrayList<Customer> customers = this.customerCtr.getAll();
+            for(Customer customer: customers){
+                if(password.equals(customer.getPassword()) && id.equals(customer.getUsername())){
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("CustomerView.fxml"));
+                    Parent root = loader.load();
+                    CustomerView customerView = loader.getController();
+                    customerView.setService(this.service);
+                    stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+                    scene = new Scene(root);
+                    stage.setScene(scene);
+                    stage.show();
+                }
             }
         }
 
-        ArrayList<Customer> customers = this.customerCtr.getAll();
-        for(Customer customer: customers){
-            if(password.equals(customer.getPassword()) && id.equals(customer.getUsername())){
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("user.fxml"));
-                Parent root = loader.load();
-                ControllerLogin controllerLogin = loader.getController();
-                controllerLogin.setService(this.service);
-                stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-                scene = new Scene(root);
-                stage.setScene(scene);
-                stage.show();
-            }
-        }
     }
     public void validateSingUp(){
         Customer customer = new Customer(this.upUserName.getText(), this.upPassword.getText(),
@@ -97,6 +101,10 @@ public class ControllerLogin {
         this.logIn.setVisible(false);
         this.singUp.setVisible(true);
     }
+    public void changeToForgotPassword(){
+        this.logIn.setVisible(false);
+        this.forgotPassword.setVisible(true);
+    }
     public void close(){
         this.stage = (Stage) scenePane.getScene().getWindow();
         stage.close();
@@ -105,5 +113,11 @@ public class ControllerLogin {
         this.service = service;
         this.adminCtr.setService(service);
         this.customerCtr.setService(service);
+    }
+
+    public void back(){
+        this.forgotPassword.setVisible(false);
+        this.singUp.setVisible(false);
+        this.logIn.setVisible(true);
     }
 }

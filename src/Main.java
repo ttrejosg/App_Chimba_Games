@@ -1,7 +1,8 @@
-import GUI.ControllerLogin;
+import GUI.Login;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
 import javafx.stage.StageStyle;
@@ -14,11 +15,13 @@ public class Main extends Application{
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("GUI/Login.fxml"));
             Parent root = loader.load();
-            ControllerLogin controllerLogin = loader.getController();
-            controllerLogin.setService(new Service("http://localhost:8080/"));
+            Login login = loader.getController();
+            login.setService(new Service("http://localhost:8080/"));
+            Scene scene = new Scene(root);
+            scene.setFill(Color.TRANSPARENT);
+            stage.setScene(scene);
+            stage.initStyle(StageStyle.TRANSPARENT);
 
-            stage.setScene(new Scene(root));
-            stage.initStyle(StageStyle.UNDECORATED);
 
             root.setOnMousePressed(event -> {
                 x = event.getSceneX();

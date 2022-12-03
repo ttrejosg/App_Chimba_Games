@@ -22,7 +22,7 @@ public class Service {
 
     public JSONObject GET(String endPoint) {
         String response = "";
-        System.out.println("solicitando a: " + this.server + endPoint);
+        System.out.println("Obteniendo de: " + this.server + endPoint);
         HttpClient client = HttpClient.newHttpClient();
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(this.server + endPoint))
@@ -50,7 +50,7 @@ public class Service {
 
     public JSONArray GET_ALL(String endPoint) {
         String response = "";
-        System.out.println("solicitando a: " + this.server + endPoint);
+        System.out.println("Obteniendo de: " + this.server + endPoint);
         HttpClient client = HttpClient.newHttpClient();
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(this.server + endPoint))
@@ -77,7 +77,7 @@ public class Service {
     }
 
     public String POST(String endPoint, JSONObject data) {
-        System.out.println("solicitando a: " + this.server + endPoint);
+        System.out.println("Post a: " + this.server + endPoint);
         String respuesta = "";
         try {
             String postEndpoint = this.server + endPoint;
@@ -101,7 +101,7 @@ public class Service {
     }
 
     public String PUT(String endPoint, JSONObject data) {
-        System.out.println("solicitando a: " + this.server + endPoint);
+        System.out.println("Put a: " + this.server + endPoint);
         String respuesta = "";
         try {
             String postEndpoint = this.server + endPoint;
@@ -124,7 +124,7 @@ public class Service {
     }
 
     public String DELETE(String endPoint) {
-        System.out.println("solicitando a: " + this.server + endPoint);
+        System.out.println("Delete a: " + this.server + endPoint);
         String respuesta = "";
         try {
             String deleteEndpoint = this.server + endPoint;

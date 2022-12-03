@@ -4,9 +4,13 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
+import services.Service;
 
-public class ControllerCustomer {
+public class CustomerView {
+    private Service service;
+    public CustomerView(){
+
+    }
     @FXML
     private Button btnOverview, btnOrders, btnCustomers, btnMenu, btnPackages, btnSettings, btnSignout, btnMenus;
     @FXML
@@ -30,5 +34,9 @@ public class ControllerCustomer {
             pnlOrders.setStyle("-fx-background-color : #464F67");
             pnlOrders.toFront();
         }
+    }
+
+    public void setService(Service service){
+        this.service = service;
     }
 }

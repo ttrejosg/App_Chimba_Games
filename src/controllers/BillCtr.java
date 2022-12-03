@@ -33,7 +33,7 @@ public class BillCtr {
     }
 
 
-    public boolean delet(String id){
+    public boolean delete(String id){
         String response = service.DELETE("bills/" + id);
         return response == "";
     }
