@@ -7,6 +7,7 @@ import javafx.scene.layout.Pane;
 import services.Service;
 
 public class CustomerView {
+    public double x,y;
     private Service service;
     public CustomerView(){
 

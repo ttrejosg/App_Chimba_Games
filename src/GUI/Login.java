@@ -13,7 +13,9 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import models.Admin;
 import models.Customer;
 import services.Service;
@@ -42,6 +44,7 @@ public class Login {
     private CustomerCtr customerCtr;
     private Stage stage; Scene scene; Parent root;
     private Alert alert;
+    public double x, y;
 
     public Login(){
         this.alert = new Alert(Alert.AlertType.INFORMATION);
@@ -63,6 +66,7 @@ public class Login {
                     this.resetFields();
                 }
             } catch (IOException e) {
+                e.printStackTrace();
                 System.out.println("Error al cambiar el escenario");
             }
         }else this.showMessageDialog("Sign in","There are incomplete Fields");
@@ -82,7 +86,7 @@ public class Login {
             this.showMessageDialog("Sign Up","Age must be an entire number");
         }
         String description = this.upDescription.getText();
-        if(!username.isBlank() && !password.isBlank() && !name.isBlank() && !lastname.isBlank() && !cellphone.isBlank() && !email.isBlank()){
+        if(!username.isBlank() && !password.isBlank() && !name.isBlank() && !lastname.isBlank() && !cellphone.isBlank() && !email.isBlank() && age != 0){
             Customer customer = new Customer(username,password,name,lastname,cellphone,email,age);
             customer.setDescription(description);
             if(this.customerCtr.create(customer)){
@@ -110,26 +114,44 @@ public class Login {
         }else this.showMessageDialog("Forgot password","There are incomplete Fields");
     }
 
-    public void changeToAdminView(ActionEvent event) throws IOException {
+    public void changeToAdminView(ActionEvent e) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("AdminView.fxml"));
         Parent root = loader.load();
         AdminView adminView = loader.getController();
         adminView.setService(this.service);
-        this.stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        this.stage = (Stage)((Node)e.getSource()).getScene().getWindow();
         this.scene = new Scene(root);
+        scene.setFill(Color.TRANSPARENT);
         this.stage.setScene(scene);
+        root.setOnMousePressed(event -> {
+            adminView.x = event.getSceneX();
+            adminView.y = event.getSceneY();
+        });
+        root.setOnMouseDragged(event -> {
+            stage.setX(event.getScreenX() - adminView.x);
+            stage.setY(event.getScreenY() - adminView.y);
+        });
         this.stage.show();
     }
 
-    public void changeToCustomerView(ActionEvent event) throws IOException {
+    public void changeToCustomerView(ActionEvent e) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("CustomerView"));
         Parent root = loader.load();
         CustomerView customerView= loader.getController();
         customerView.setService(this.service);
-        this.stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        this.scene = new Scene(root);
-        this.stage.setScene(scene);
-        this.stage.show();
+        stage = (Stage)((Node)e.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        scene.setFill(Color.TRANSPARENT);
+        stage.setScene(scene);
+        root.setOnMousePressed(event -> {
+            customerView.x = event.getSceneX();
+            customerView.y = event.getSceneY();
+        });
+        root.setOnMouseDragged(event -> {
+            stage.setX(event.getScreenX() - customerView.x);
+            stage.setY(event.getScreenY() - customerView.y);
+        });
+        stage.show();
     }
 
     public void changeToSingUp(){

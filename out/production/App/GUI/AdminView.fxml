@@ -43,7 +43,7 @@
                         </ImageView>
                      </graphic>
                   </Button>
-                  <Button contentDisplay="TOP" layoutX="10.0" layoutY="142.0" mnemonicParsing="false" onAction="#showCustomersListPane" prefHeight="66.0" prefWidth="74.0" styleClass="button3" stylesheets="@fullpackstyling.css" text="Clientes" textFill="#a868a0">
+                  <Button contentDisplay="TOP" layoutX="10.0" layoutY="142.0" mnemonicParsing="false" onAction="#showCustomersListPane" prefHeight="66.0" prefWidth="74.0" styleClass="button3" stylesheets="@fullpackstyling.css" text="Cliente" textFill="#a868a0">
                      <graphic>
                         <ImageView fitHeight="25.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -52,7 +52,7 @@
                         </ImageView>
                      </graphic>
                   </Button>
-                  <Button contentDisplay="TOP" layoutX="10.0" layoutY="76.0" mnemonicParsing="false" prefHeight="66.0" prefWidth="74.0" styleClass="button3" stylesheets="@fullpackstyling.css" text="Salir" textFill="#a868a0">
+                  <Button contentDisplay="TOP" layoutX="10.0" layoutY="76.0" mnemonicParsing="false" onAction="#backToLogin" prefHeight="66.0" prefWidth="74.0" styleClass="button3" stylesheets="@fullpackstyling.css" text="Salir" textFill="#a868a0">
                      <graphic>
                         <ImageView fitHeight="25.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -90,18 +90,20 @@
                               <Font size="13.0" />
                            </font>
                         </Label>
-                        <ComboBox fx:id="customersFilterComboBox" layoutX="347.0" layoutY="77.0" prefHeight="28.0" prefWidth="74.0" />
-                        <TextField fx:id="customersSearchField" layoutX="429.0" layoutY="68.0" />
-                        <Button layoutX="593.0" layoutY="66.0" mnemonicParsing="false" text="Search" />
-                        <Button layoutX="676.0" layoutY="66.0" mnemonicParsing="false" text="Delete" />
-                        <TableView fx:id="customersTableView" layoutX="80.0" layoutY="136.0" prefHeight="368.0" prefWidth="698.0">
+                        <ComboBox fx:id="customersFilterComboBox" layoutX="345.0" layoutY="77.0" prefHeight="28.0" prefWidth="144.0" styleClass="combo-box" stylesheets="@fullpackstyling.css" />
+                        <TextField fx:id="customersSearchField" layoutX="503.0" layoutY="78.0" promptText="Input" styleClass="combo-box" />
+                        <Button layoutX="684.0" layoutY="76.0" mnemonicParsing="false" onAction="#searchCustomer" style="-fx-background-color: rgb(78, 2, 176); -fx-text-fill: rgb(250, 250, 250);" styleClass="button2" text="Search" />
+                        <Button layoutX="764.0" layoutY="76.0" mnemonicParsing="false" onAction="#deleteCustomer" style="-fx-background-color: rgb(225, 26, 26); -fx-text-fill: rgb(250, 250, 250);" styleClass="button2" text="Delete" />
+                        <TableView fx:id="customersTableView" layoutX="18.0" layoutY="128.0" prefHeight="368.0" prefWidth="822.0">
                           <columns>
-                            <TableColumn fx:id="userNameTableColumn" prefWidth="99.0" text="UserName" />
-                            <TableColumn fx:id="passwordTableColumn" prefWidth="101.0" text="Password" />
-                              <TableColumn fx:id="nameTableColumn" prefWidth="107.99996948242188" text="Name" />
-                              <TableColumn fx:id="lastnameTableColumn" prefWidth="102.00003051757812" text="Lastname" />
-                              <TableColumn fx:id="cellphoneTableColumn" prefWidth="123.0" text="Cellphone" />
-                              <TableColumn fx:id="emailTableColumn" prefWidth="163.0" text="Email" />
+                              <TableColumn fx:id="nameTableColumn" prefWidth="95.0" text="Name" />
+                              <TableColumn fx:id="lastnameTableColumn" prefWidth="108.0" text="Lastname" />
+                            <TableColumn fx:id="userNameTableColumn" prefWidth="112.0" text="UserName" />
+                            <TableColumn fx:id="passwordTableColumn" prefWidth="93.0" text="Password" />
+                              <TableColumn fx:id="cellphoneTableColumn" prefWidth="112.0" text="Cellphone" />
+                              <TableColumn fx:id="emailTableColumn" prefWidth="161.0" text="Email" />
+                              <TableColumn fx:id="ageTableColumn" prefWidth="45.0" text="Age" />
+                              <TableColumn fx:id="descriptionTableColumn" prefWidth="121.0" text="Description" />
                           </columns>
                         </TableView>
                      </children>
@@ -153,7 +155,10 @@
                   </AnchorPane>
                </children>
             </StackPane>
-            <Button layoutX="927.0" layoutY="9.0" mnemonicParsing="false" onAction="#close" styleClass="button2" stylesheets="@fullpackstyling.css" text="Exit" />
+            <Button layoutX="913.0" layoutY="9.0" mnemonicParsing="false" onAction="#close" prefHeight="38.0" prefWidth="61.0" style="-fx-text-fill: rgb(250, 250, 250);" styleClass="button2" stylesheets="@fullpackstyling.css" text="Exit">
+               <font>
+                  <Font size="16.0" />
+               </font></Button>
          </children>
       </AnchorPane>
    </children>

@@ -1,6 +1,5 @@
 package controllers;
 
-import models.Admin;
 import models.Customer;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -22,6 +21,18 @@ public class CustomerCtr {
         JSONObject response = service.GET("customers/" + id);
         if(response != null) return new Customer(response);
         else return null;
+    }
+
+    public ArrayList<Customer> getby(String by, String attribute){
+        JSONArray response = service.GET_ALL("customers/" + by + "/" + attribute);
+        ArrayList<Customer> customers= new ArrayList<>();
+        if(response != null){
+            for (Object customer : response) {
+                Customer newCustomer = new Customer((JSONObject) customer);
+                customers.add(newCustomer);
+            }
+        }
+        return customers;
     }
 
     public ArrayList<Customer> getAll(){
@@ -82,8 +93,8 @@ public class CustomerCtr {
     }
 
     public Customer getByUsername(String username){
-        JSONObject response = service.GET("customers/username/" + username);
-        if(response != null) return new Customer(response);
+        JSONArray response = service.GET_ALL("customers/username/" + username);
+        if(!response.isEmpty()) return new Customer((JSONObject)response.get(0));
         else return null;
     }
 
