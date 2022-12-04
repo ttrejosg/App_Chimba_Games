@@ -32,6 +32,12 @@ public class AdminCtr {
         else return null;
     }
 
+    public Admin getByUsername(String username){
+        JSONObject response = service.GET("admins/username/" + username);
+        if(response != null) return new Admin(response);
+        else return null;
+    }
+
     public void setService(Service service){
         this.service = service;
     }

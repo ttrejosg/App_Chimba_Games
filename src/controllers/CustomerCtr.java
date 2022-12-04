@@ -76,9 +76,15 @@ public class CustomerCtr {
         return edited;
     }
 
-    public boolean delet(String id){
+    public boolean delete(String id){
         String response = service.DELETE("customers/" + id);
         return response == "";
+    }
+
+    public Customer getByUsername(String username){
+        JSONObject response = service.GET("customers/username/" + username);
+        if(response != null) return new Customer(response);
+        else return null;
     }
 
     public void setService(Service service){

@@ -16,7 +16,7 @@ public class Customer extends User{
     private ArrayList<Chat> chats;
     private ArrayList<Bill> bills;
 
-    public Customer(String username, String password, String name, String lastname, String cellphone, String email, int age) {
+    public Customer(String username, String password, String name, String lastname, String cellphone, String email, long age) {
         super(username, password);
         this.name = name;
         this.lastname = lastname;

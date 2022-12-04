@@ -16,3 +16,10 @@
 -fx-border-color: #FFFFFF;
 -fx-text-fill: #FFFFFF;
 }
+
+.textField{
+    -fx-border-color: rgb(250, 250, 250);
+    -fx-background-color: transparente;
+    -fx-border-width: 0px 0px 2px 0px;
+    -fx-text-fill: #FFFFFF;
+}
