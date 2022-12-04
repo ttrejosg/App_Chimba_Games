@@ -13,7 +13,9 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import models.Admin;
 import models.Customer;
 import services.Service;
@@ -26,6 +28,7 @@ public class Login {
     private AdminCtr adminCtr;
     private CustomerCtr customerCtr;
     private Stage stage; Scene scene; Parent root;
+    public double x, y;
     @FXML
     private TextField inUserName;
     @FXML
@@ -49,27 +52,21 @@ public class Login {
         ArrayList<Admin> admins = this.adminCtr.getAll();
         for(Admin admin: admins){
             if(password.equals(admin.getPassword()) && id.equals(admin.getUsername())){
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("AdminView.fxml"));
-                Parent root = loader.load();
-                AdminView adminView = loader.getController();
-                adminView.setService(this.service);
-                stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-                scene = new Scene(root);
-                stage.setScene(scene);
-                stage.show();
+                this.prepareStageAdmin(event);
                 found = true;
             }
         }
         if(!found){
-            ArrayList<Customer> customers = this.customerCtr.getAll();
+            ArrayList<Customer> customers = this.customerCtr.getby("username", id);
             for(Customer customer: customers){
-                if(password.equals(customer.getPassword()) && id.equals(customer.getUsername())){
+                if(password.equals(customer.getPassword())){
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("CustomerView.fxml"));
                     Parent root = loader.load();
                     CustomerView customerView = loader.getController();
                     customerView.setService(this.service);
                     stage = (Stage)((Node)event.getSource()).getScene().getWindow();
                     scene = new Scene(root);
+                    scene.setFill(Color.TRANSPARENT);
                     stage.setScene(scene);
                     stage.show();
                 }
@@ -97,6 +94,29 @@ public class Login {
             alert.showAndWait();
         }
     }
+
+    public void prepareStageAdmin(ActionEvent e) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("AdminView.fxml"));
+        Parent root = loader.load();
+        AdminView adminView = loader.getController();
+        adminView.setService(this.service);
+        stage = (Stage)((Node)e.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        scene.setFill(Color.TRANSPARENT);
+        stage.setScene(scene);
+        root.setOnMousePressed(event -> {
+            adminView.x = event.getSceneX();
+            adminView.y = event.getSceneY();
+        });
+        root.setOnMouseDragged(event -> {
+
+            stage.setX(event.getScreenX() - adminView.x);
+            stage.setY(event.getScreenY() - adminView.y);
+
+        });
+        stage.show();
+    }
+
     public void changeToSingUp(){
         this.logIn.setVisible(false);
         this.singUp.setVisible(true);
