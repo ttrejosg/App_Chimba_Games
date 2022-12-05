@@ -111,6 +111,7 @@ public class CustomerView implements Initializable {
         int index = this.friendsChaList.getSelectionModel().getSelectedIndex();
         Chat currentChat = this.chats.get(index);
         ArrayList<Message> messages = this.messageCtr.getMessages(currentChat.getId());
+        vboxMessages.getChildren().clear();
         for(Message message: messages){
             if(message.getCustomer().getId().equals(this.customer.getId())){
                 HBox hBox = new HBox();
@@ -164,7 +165,7 @@ public class CustomerView implements Initializable {
             if(this.customer.getId().equals(chats.get(i).getCustomer1().getId()))friends[i] = chats.get(i).getCustomer2().getUsername();
             else friends[i] = chats.get(i).getCustomer1().getUsername();
         }
-        this.friendsChaList.getItems().addAll(friends);
+        this.friendsChaList.getItems().setAll(friends);
         this.friendsChaList.getSelectionModel().selectedItemProperty().addListener(this::loadMessages);
     }
 
