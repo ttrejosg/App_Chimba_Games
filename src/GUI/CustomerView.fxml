@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="scenePane" style="-fx-background-radius: 20;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.CustomerView">
+    <children>
+        <AnchorPane prefHeight="616.0" prefWidth="993.0" style="-fx-background-color: #030307; -fx-background-radius: 15;">
+            <children>
+                <ImageView fx:id="icon" fitHeight="38.0" fitWidth="34.0" layoutX="91.0" layoutY="21.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../Images/logo.png" />
+                    </image>
+                </ImageView>
+                <Label fx:id="name" layoutX="134.0" layoutY="29.0" prefHeight="19.0" prefWidth="511.0" text="Admin" textFill="#ffea0f">
+                    <font>
+                        <Font size="13.0" />
+                    </font>
+                </Label>
+                <VBox prefHeight="544.0" prefWidth="74.0" style="-fx-background-color: #141124; -fx-background-radius: 15 0 0 15;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <children>
+                        <Pane prefHeight="161.0" prefWidth="74.0" style="-fx-background-radius: 15 0 15 15; -fx-background-color: #141124;" />
+                        <Button contentDisplay="TOP" mnemonicParsing="false" onAction="#showProfilePane" prefHeight="66.0" prefWidth="74.0" styleClass="button3" stylesheets="@fullpackstyling.css" text="Profile" textFill="#a868a0">
+                            <graphic>
+                                <ImageView fitHeight="25.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@../Images/group.png" />
+                                    </image>
+                                </ImageView>
+                            </graphic>
+                        </Button>
+                  <Button contentDisplay="TOP" mnemonicParsing="false" onAction="#showChatPane" prefHeight="66.0" prefWidth="74.0" styleClass="button3" stylesheets="@fullpackstyling.css" text="Chat" textFill="#a868a0">
+                     <graphic>
+                        <ImageView fitHeight="25.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../Images/icons8_Open_Envelope_32px.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                        <Button contentDisplay="TOP" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#showGamesListPane" prefHeight="66.0" prefWidth="74.0" styleClass="button3" stylesheets="@fullpackstyling.css" text="Store" textFill="#a868a0">
+                            <graphic>
+                                <ImageView fitHeight="25.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@../Images/icons8_Shopping_Cart_50px_2.png" />
+                                    </image>
+                                </ImageView>
+                            </graphic>
+                        </Button>
+                  <Button contentDisplay="TOP" mnemonicParsing="false" onAction="#showVideoGamePane" prefHeight="66.0" prefWidth="74.0" styleClass="button3" stylesheets="@fullpackstyling.css" text="Games" textFill="#a868a0">
+                     <graphic>
+                        <ImageView fitHeight="25.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../Images/icons8_Xbox_Menu_32px.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                        <Button contentDisplay="TOP" layoutX="10.0" layoutY="76.0" mnemonicParsing="false" onAction="#backToLogin" prefHeight="66.0" prefWidth="74.0" styleClass="button3" stylesheets="@fullpackstyling.css" text="Salir" textFill="#a868a0">
+                            <graphic>
+                                <ImageView fitHeight="25.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@../Images/icons8_Sign_Out_32px.png" />
+                                    </image>
+                                </ImageView>
+                            </graphic>
+                        </Button>
+                    </children>
+                </VBox>
+                <StackPane layoutX="108.0" layoutY="71.0" prefHeight="518.0" prefWidth="857.0">
+                    <children>
+                  <AnchorPane fx:id="chatPane" prefHeight="531.0" prefWidth="886.0" style="-fx-background-color: #131022; -fx-background-radius: 30;" stylesheets="@fullpackstyling.css">
+                     <children>
+                        <ScrollPane fx:id="spMain" layoutX="228.0" layoutY="67.0" prefHeight="382.0" prefWidth="615.0">
+                           <content>
+                              <VBox fx:id="vboxMessages" prefHeight="368.0" prefWidth="614.0" />
+                           </content></ScrollPane>
+                        <Pane layoutX="228.0" layoutY="22.0" prefHeight="46.0" prefWidth="615.0" style="-fx-background-color: rgb(25, 0, 57); -fx-background-radius: 30 30 0 0;">
+                           <children>
+                              <Label fx:id="labelChat" layoutX="101.0" layoutY="15.0" prefHeight="17.0" prefWidth="411.0" text="Label" textFill="#ffea0f" />
+                              <ImageView fx:id="chatIcon" fitHeight="34.0" fitWidth="34.0" layoutX="38.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true" />
+                           </children>
+                        </Pane>
+                        <ListView fx:id="friendsChaList" layoutX="14.0" layoutY="24.0" prefHeight="477.0" prefWidth="200.0" style="-fx-background-radius: 10; -fx-border-color: rgb(25, 0, 57); -fx-background-color: rgb(25, 0, 57);" />
+                        <Pane layoutX="228.0" layoutY="449.0" prefHeight="52.0" prefWidth="615.0" style="-fx-background-color: rgb(25, 0, 57); -fx-background-radius: 0 0 30 30;">
+                           <children>
+                              <Button layoutX="550.0" layoutY="11.0" mnemonicParsing="false" onAction="#send" prefHeight="31.0" prefWidth="47.0" style="-fx-text-fill: rgb(250, 250, 250);" styleClass="button2" text="Send" />
+                              <TextField fx:id="inputMessage" layoutX="9.0" layoutY="11.0" prefHeight="31.0" prefWidth="530.0" style="-fx-background-color: rgb&amp;250, 250, 250); -fx-background-radius: 20;" />
+                           </children>
+                        </Pane>
+                     </children>
+                  </AnchorPane>
+                        <AnchorPane fx:id="videoGamePane" prefHeight="531.0" prefWidth="886.0" style="-fx-background-color: #131022; -fx-background-radius: 30;" stylesheets="@fullpackstyling.css" />
+                        <AnchorPane fx:id="videoGamesListPane" prefHeight="531.0" prefWidth="886.0" style="-fx-background-color: #131022; -fx-background-radius: 30;" stylesheets="@fullpackstyling.css">
+                            <children>
+                                <Label layoutX="39.0" layoutY="34.0" prefHeight="38.0" prefWidth="203.0" text="Videojuegos :" textFill="WHITE">
+                                    <font>
+                                        <Font size="26.0" />
+                                    </font>
+                                </Label>
+                                <Label layoutX="39.0" layoutY="81.0" text="Aquí puedes administrar los videojuegos de la tienda" textFill="#ffea0f">
+                                    <font>
+                                        <Font size="13.0" />
+                                    </font>
+                                </Label>
+                                <Button layoutX="39.0" layoutY="120.0" mnemonicParsing="false" onAction="#showVideoGamePane" prefHeight="166.0" prefWidth="174.0" style="-fx-background-radius: 30;" text="Button">
+                                    <graphic>
+                                        <ImageView fitHeight="150.0" fitWidth="159.0" pickOnBounds="true" preserveRatio="true" />
+                                    </graphic>
+                                </Button>
+                                <Button layoutX="258.0" layoutY="120.0" mnemonicParsing="false" prefHeight="166.0" prefWidth="174.0" style="-fx-background-radius: 30;" text="Button">
+                                    <graphic>
+                                        <ImageView fitHeight="150.0" fitWidth="159.0" pickOnBounds="true" preserveRatio="true" />
+                                    </graphic>
+                                </Button>
+                                <Button layoutX="496.0" layoutY="120.0" mnemonicParsing="false" prefHeight="166.0" prefWidth="174.0" style="-fx-background-radius: 30;" text="Button">
+                                    <graphic>
+                                        <ImageView fitHeight="150.0" fitWidth="159.0" pickOnBounds="true" preserveRatio="true" />
+                                    </graphic>
+                                </Button>
+                                <Button layoutX="39.0" layoutY="304.0" mnemonicParsing="false" prefHeight="166.0" prefWidth="174.0" style="-fx-background-radius: 30;" text="Button">
+                                    <graphic>
+                                        <ImageView fitHeight="150.0" fitWidth="159.0" pickOnBounds="true" preserveRatio="true" />
+                                    </graphic>
+                                </Button>
+                                <Button layoutX="258.0" layoutY="304.0" mnemonicParsing="false" prefHeight="166.0" prefWidth="174.0" style="-fx-background-radius: 30;" text="Button">
+                                    <graphic>
+                                        <ImageView fitHeight="150.0" fitWidth="159.0" pickOnBounds="true" preserveRatio="true" />
+                                    </graphic>
+                                </Button>
+                                <Button layoutX="496.0" layoutY="304.0" mnemonicParsing="false" prefHeight="166.0" prefWidth="174.0" style="-fx-background-radius: 30;" text="Button">
+                                    <graphic>
+                                        <ImageView fitHeight="150.0" fitWidth="159.0" pickOnBounds="true" preserveRatio="true" />
+                                    </graphic>
+                                </Button>
+                                <Button layoutX="772.0" layoutY="252.0" mnemonicParsing="false" prefHeight="52.0" prefWidth="54.0" text="Button" />
+                            </children>
+                        </AnchorPane>
+                        <AnchorPane fx:id="profilePane" prefHeight="531.0" prefWidth="886.0" style="-fx-background-color: #131022; -fx-background-radius: 30;" stylesheets="@fullpackstyling.css">
+                            <children>
+                                <Label layoutX="39.0" layoutY="34.0" text="Profile  :" textFill="WHITE">
+                                    <font>
+                                        <Font size="26.0" />
+                                    </font>
+                                </Label>
+                                <Label layoutX="39.0" layoutY="81.0" text="Aquí puedes administrar tu perfil y tus amistades" textFill="#ffea0f">
+                                    <font>
+                                        <Font size="13.0" />
+                                    </font>
+                                </Label>
+                        <TextField fx:id="inName" layoutX="29.0" layoutY="197.0" prefHeight="25.0" prefWidth="111.0" promptText="Name*" />
+                        <TextField fx:id="inLastname" layoutX="172.0" layoutY="197.0" prefHeight="25.0" prefWidth="143.0" promptText="Lastname*" />
+                        <TextField fx:id="inUsername" layoutX="29.0" layoutY="138.0" prefHeight="25.0" prefWidth="111.0" promptText="Username*" />
+                        <TextField fx:id="inPassword" layoutX="172.0" layoutY="138.0" prefHeight="25.0" prefWidth="203.0" promptText="Password*" />
+                        <TextField fx:id="inAge" layoutX="326.0" layoutY="197.0" prefHeight="25.0" prefWidth="46.0" promptText="Age*" />
+                        <TextField fx:id="inEmail" layoutX="172.0" layoutY="259.0" prefHeight="25.0" prefWidth="203.0" promptText="Email*" />
+                        <TextField fx:id="inCellphone" layoutX="29.0" layoutY="259.0" prefHeight="25.0" prefWidth="111.0" promptText="Cellphone*" />
+                        <TextArea fx:id="inDescription" layoutX="29.0" layoutY="311.0" prefHeight="124.0" prefWidth="348.0" promptText="Description" />
+                        <Button layoutX="28.0" layoutY="458.0" mnemonicParsing="false" onAction="#changueIcon" text="Changue Icon" />
+                        <Button layoutX="172.0" layoutY="458.0" mnemonicParsing="false" onAction="#save" text="Save" />
+                        <Button layoutX="270.0" layoutY="458.0" mnemonicParsing="false" onAction="#setOnline" text="Set Online" />
+                        <ListView fx:id="friendsList" layoutX="417.0" layoutY="138.0" prefHeight="353.0" prefWidth="187.0" />
+                        <Label layoutX="435.0" layoutY="90.0" text="My Friends" textFill="WHITE">
+                           <font>
+                              <Font size="26.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="searchFriend" layoutX="666.0" layoutY="93.0" prefHeight="25.0" prefWidth="128.0" promptText="Buscar" />
+                        <Button layoutX="700.0" layoutY="138.0" mnemonicParsing="false" onAction="#addFriend" text="Añadir amigo" />
+                        <TextField fx:id="frName" editable="false" layoutX="650.0" layoutY="185.0" prefHeight="25.0" prefWidth="187.0" promptText="Name" />
+                        <TextField fx:id="frLastname" editable="false" layoutX="650.0" layoutY="234.0" prefHeight="25.0" prefWidth="187.0" promptText="Lastname" />
+                        <Button layoutX="804.0" layoutY="87.0" mnemonicParsing="false" onAction="#searchCustomer" prefHeight="38.0" prefWidth="46.0" style="-fx-background-color: #131022;">
+                           <graphic>
+                              <ImageView fitHeight="37.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../Images/icons8_Play_48px.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                        <TextField fx:id="frAge" editable="false" layoutX="780.0" layoutY="284.0" prefHeight="25.0" prefWidth="54.0" promptText="Age" />
+                        <TextField fx:id="frCellphone" editable="false" layoutX="650.0" layoutY="284.0" promptText="Cellphone" />
+                        <TextField fx:id="frEmail" editable="false" layoutX="650.0" layoutY="336.0" prefHeight="25.0" prefWidth="187.0" promptText="Email" />
+                        <TextArea fx:id="frDescription" editable="false" layoutX="648.0" layoutY="377.0" prefHeight="114.0" prefWidth="187.0" promptText="Description" />
+                        <Separator layoutX="622.0" layoutY="113.0" orientation="VERTICAL" prefHeight="382.0" prefWidth="6.0" style="-fx-background-color: #ffea0f;" />
+                        <Separator layoutX="399.0" layoutY="113.0" orientation="VERTICAL" prefHeight="382.0" prefWidth="6.0" style="-fx-background-color: #ffea0f;" />
+                            </children>
+                        </AnchorPane>
+                    </children>
+                </StackPane>
+                <Button layoutX="913.0" layoutY="9.0" mnemonicParsing="false" onAction="#close" prefHeight="38.0" prefWidth="61.0" style="-fx-text-fill: rgb(250, 250, 250);" styleClass="button2" stylesheets="@fullpackstyling.css" text="Exit">
+                    <font>
+                        <Font size="16.0" />
+                    </font></Button>
+            </children>
+        </AnchorPane>
+    </children>
+</AnchorPane>

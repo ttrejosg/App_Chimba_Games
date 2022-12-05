@@ -60,7 +60,7 @@ public class Login {
                 Admin foundAdmin = this.adminCtr.getByUsername(username);
                 Customer foundCustomer = this.customerCtr.getByUsername(username);
                 if(foundAdmin != null && foundAdmin.getPassword().equals(password)) changeToAdminView(event);
-                else if(foundCustomer != null && foundCustomer.getPassword().equals(password)) changeToCustomerView(event);
+                else if(foundCustomer != null && foundCustomer.getPassword().equals(password)) changeToCustomerView(event, foundCustomer);
                 else{
                     this.showMessageDialog("Sign In","Wrong username or password");
                     this.resetFields();
@@ -134,11 +134,13 @@ public class Login {
         this.stage.show();
     }
 
-    public void changeToCustomerView(ActionEvent e) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("CustomerView"));
+    public void changeToCustomerView(ActionEvent e, Customer customer) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("CustomerView.fxml"));
         Parent root = loader.load();
         CustomerView customerView= loader.getController();
         customerView.setService(this.service);
+        customerView.setInformation(customer);
+        customerView.fillTable();
         stage = (Stage)((Node)e.getSource()).getScene().getWindow();
         scene = new Scene(root);
         scene.setFill(Color.TRANSPARENT);
