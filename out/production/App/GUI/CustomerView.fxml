@@ -85,11 +85,11 @@
                      <children>
                         <ScrollPane fx:id="spMain" layoutX="228.0" layoutY="67.0" prefHeight="382.0" prefWidth="615.0">
                            <content>
-                              <VBox fx:id="vboxMessages" prefHeight="368.0" prefWidth="614.0" />
+                              <VBox fx:id="vboxMessages" prefHeight="368.0" prefWidth="595.0" />
                            </content></ScrollPane>
                         <Pane layoutX="228.0" layoutY="22.0" prefHeight="46.0" prefWidth="615.0" style="-fx-background-color: rgb(25, 0, 57); -fx-background-radius: 30 30 0 0;">
                            <children>
-                              <Label fx:id="labelChat" layoutX="101.0" layoutY="15.0" prefHeight="17.0" prefWidth="411.0" text="Label" textFill="#ffea0f" />
+                              <Label fx:id="labelChat" layoutX="101.0" layoutY="15.0" prefHeight="17.0" prefWidth="411.0" text="User" textFill="#ffea0f" />
                               <ImageView fx:id="chatIcon" fitHeight="34.0" fitWidth="34.0" layoutX="38.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true" />
                            </children>
                         </Pane>
@@ -102,8 +102,8 @@
                         </Pane>
                      </children>
                   </AnchorPane>
-                        <AnchorPane fx:id="videoGamePane" prefHeight="531.0" prefWidth="886.0" style="-fx-background-color: #131022; -fx-background-radius: 30;" stylesheets="@fullpackstyling.css" />
-                        <AnchorPane fx:id="videoGamesListPane" prefHeight="531.0" prefWidth="886.0" style="-fx-background-color: #131022; -fx-background-radius: 30;" stylesheets="@fullpackstyling.css">
+                        <AnchorPane fx:id="videoGamePane" prefHeight="531.0" prefWidth="886.0" style="-fx-background-color: #131022; -fx-background-radius: 30;" stylesheets="@fullpackstyling.css" visible="false" />
+                        <AnchorPane fx:id="videoGamesListPane" prefHeight="531.0" prefWidth="886.0" style="-fx-background-color: #131022; -fx-background-radius: 30;" stylesheets="@fullpackstyling.css" visible="false">
                             <children>
                                 <Label layoutX="39.0" layoutY="34.0" prefHeight="38.0" prefWidth="203.0" text="Videojuegos :" textFill="WHITE">
                                     <font>
@@ -148,7 +148,7 @@
                                 <Button layoutX="772.0" layoutY="252.0" mnemonicParsing="false" prefHeight="52.0" prefWidth="54.0" text="Button" />
                             </children>
                         </AnchorPane>
-                        <AnchorPane fx:id="profilePane" prefHeight="531.0" prefWidth="886.0" style="-fx-background-color: #131022; -fx-background-radius: 30;" stylesheets="@fullpackstyling.css">
+                        <AnchorPane fx:id="profilePane" prefHeight="531.0" prefWidth="886.0" style="-fx-background-color: #131022; -fx-background-radius: 30;" stylesheets="@fullpackstyling.css" visible="false">
                             <children>
                                 <Label layoutX="39.0" layoutY="34.0" text="Profile  :" textFill="WHITE">
                                     <font>

@@ -102,6 +102,7 @@ public class CustomerView implements Initializable {
                 text.setFill(Color.color(0.934, 0.945, 0.996));
                 hBox.getChildren().add(txtflow);
                 vboxMessages.getChildren().add(hBox);
+                this.chats = this.chatCtr.getChats(this.customer.getId());
             }
             inputMessage.clear();
         }
@@ -109,50 +110,53 @@ public class CustomerView implements Initializable {
 
     public void loadMessages(ObservableValue<? extends String> observable, String oldVal, String newVal){
         int index = this.friendsChaList.getSelectionModel().getSelectedIndex();
-        Chat currentChat = this.chats.get(index);
-        ArrayList<Message> messages = this.messageCtr.getMessages(currentChat.getId());
-        vboxMessages.getChildren().clear();
-        for(Message message: messages){
-            if(message.getCustomer().getId().equals(this.customer.getId())){
-                HBox hBox = new HBox();
-                hBox.setAlignment(Pos.CENTER_RIGHT);
-                hBox.setPadding(new Insets(5, 5, 5, 10));
-                Text text = new Text(message.getText());
-                TextFlow txtflow = new TextFlow(text);
-                txtflow.setStyle("-fx-color: rgb(239, 242, 255); " + "-fx-background-color: rgb(15, 125, 242); " + "-fx-background-radius: 20px;");
-                txtflow.setPadding(new Insets(5, 10, 5, 10));
-                text.setFill(Color.color(0.934, 0.945, 0.996));
-                hBox.getChildren().add(txtflow);
-                vboxMessages.getChildren().add(hBox);
+        if(index != -1){
+            Chat currentChat = this.chats.get(index);
+            ArrayList<Message> messages = this.messageCtr.getMessages(currentChat.getId());
+            vboxMessages.getChildren().clear();
+            for(Message message: messages){
+                if(message.getCustomer().getId().equals(this.customer.getId())){
+                    HBox hBox = new HBox();
+                    hBox.setAlignment(Pos.CENTER_RIGHT);
+                    hBox.setPadding(new Insets(5, 5, 5, 10));
+                    Text text = new Text(message.getText());
+                    TextFlow txtflow = new TextFlow(text);
+                    txtflow.setStyle("-fx-color: rgb(239, 242, 255); " + "-fx-background-color: rgb(15, 125, 242); " + "-fx-background-radius: 20px;");
+                    txtflow.setPadding(new Insets(5, 10, 5, 10));
+                    text.setFill(Color.color(0.934, 0.945, 0.996));
+                    hBox.getChildren().add(txtflow);
+                    vboxMessages.getChildren().add(hBox);
+                }else{
+                    HBox hBox = new HBox();
+                    hBox.setAlignment(Pos.CENTER_LEFT);
+                    hBox.setPadding(new Insets(5, 5, 5, 10));
+                    Text text = new Text(message.getText());
+                    TextFlow txtflow = new TextFlow(text);
+                    txtflow.setStyle("-fx-background-color: rgb(233, 233, 235); " + "-fx-background-radius: 20px;");
+                    txtflow.setPadding(new Insets(5, 10, 5, 10));
+                    hBox.getChildren().add(txtflow);
+                    vboxMessages.getChildren().add(hBox);
+                }
+            }
+
+            String txt = "";
+            if(currentChat.getCustomer1().getId().equals(this.customer.getId())){
+                txt += currentChat.getCustomer2().getUsername();
+                if(currentChat.getCustomer2().isOnline()) txt += " / Online";
+                else txt += " / Offline";
+                this.labelChat.setText(txt);
+                Image image = new Image(currentChat.getCustomer2().getAvatar());
+                this.chatIcon.setImage(image);
             }else{
-                HBox hBox = new HBox();
-                hBox.setAlignment(Pos.CENTER_LEFT);
-                hBox.setPadding(new Insets(5, 5, 5, 10));
-                Text text = new Text(message.getText());
-                TextFlow txtflow = new TextFlow(text);
-                txtflow.setStyle("-fx-background-color: rgb(233, 233, 235); " + "-fx-background-radius: 20px;");
-                txtflow.setPadding(new Insets(5, 10, 5, 10));
-                hBox.getChildren().add(txtflow);
-                vboxMessages.getChildren().add(hBox);
+                txt += currentChat.getCustomer1().getUsername();
+                if(currentChat.getCustomer1().isOnline()) txt += " / Online";
+                else txt += " / Offline";
+                this.labelChat.setText(txt);
+                Image image = new Image(currentChat.getCustomer1().getAvatar());
+                this.chatIcon.setImage(image);
             }
         }
 
-        String txt = "";
-        if(currentChat.getCustomer1().getId().equals(this.customer.getId())){
-            txt += currentChat.getCustomer2().getUsername();
-            if(currentChat.getCustomer2().isOnline()) txt += " / Online";
-            else txt += " / Offline";
-            this.labelChat.setText(txt);
-            Image image = new Image(currentChat.getCustomer2().getAvatar());
-            this.chatIcon.setImage(image);
-        }else{
-            txt += currentChat.getCustomer1().getUsername();
-            if(currentChat.getCustomer1().isOnline()) txt += " / Online";
-            else txt += " / Offline";
-            this.labelChat.setText(txt);
-            Image image = new Image(currentChat.getCustomer1().getAvatar());
-            this.chatIcon.setImage(image);
-        }
     }
 
     public void fillChatTable(){

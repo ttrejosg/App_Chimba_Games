@@ -85,11 +85,11 @@
                      <children>
                         <ScrollPane fx:id="spMain" layoutX="228.0" layoutY="67.0" prefHeight="382.0" prefWidth="615.0">
                            <content>
-                              <VBox fx:id="vboxMessages" prefHeight="368.0" prefWidth="614.0" />
+                              <VBox fx:id="vboxMessages" prefHeight="368.0" prefWidth="600.0" />
                            </content></ScrollPane>
                         <Pane layoutX="228.0" layoutY="22.0" prefHeight="46.0" prefWidth="615.0" style="-fx-background-color: rgb(25, 0, 57); -fx-background-radius: 30 30 0 0;">
                            <children>
-                              <Label fx:id="labelChat" layoutX="101.0" layoutY="15.0" prefHeight="17.0" prefWidth="411.0" text="Label" textFill="#ffea0f" />
+                              <Label fx:id="labelChat" layoutX="101.0" layoutY="15.0" prefHeight="17.0" prefWidth="411.0" text="User" textFill="#ffea0f" />
                               <ImageView fx:id="chatIcon" fitHeight="34.0" fitWidth="34.0" layoutX="38.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true" />
                            </children>
                         </Pane>
