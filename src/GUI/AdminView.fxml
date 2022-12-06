@@ -75,33 +75,7 @@
             </VBox>
             <StackPane layoutX="108.0" layoutY="71.0" prefHeight="518.0" prefWidth="857.0">
                <children>
-                  <AnchorPane fx:id="videoGamePane" prefHeight="531.0" prefWidth="886.0" style="-fx-background-color: #131022; -fx-background-radius: 30;" stylesheets="@fullpackstyling.css">
-                     <children>
-                        <TextField fx:id="videogameNameField" layoutX="73.0" layoutY="68.0" prefHeight="26.0" prefWidth="174.0" promptText="Titulo" />
-                        <Button layoutX="45.0" layoutY="107.0" mnemonicParsing="false" onAction="#changeIcon" prefHeight="236.0" prefWidth="230.0" style="-fx-background-radius: 30; -fx-background-color: rgb(53, 178, 225);">
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor>
-                           <graphic>
-                              <ImageView fx:id="formImageView" fitHeight="232.0" fitWidth="225.0" pickOnBounds="true" />
-                           </graphic>
-                        </Button>
-                        <TextField fx:id="videogameStockField" layoutX="429.0" layoutY="81.0" prefHeight="19.0" prefWidth="135.0" promptText="stock" />
-                        <TextField fx:id="videogameTagField" layoutX="429.0" layoutY="144.0" prefHeight="19.0" prefWidth="135.0" promptText="tag" />
-                        <TextField fx:id="videogameDevsField" layoutX="607.0" layoutY="144.0" prefHeight="19.0" prefWidth="135.0" promptText="devs" />
-                        <TextField fx:id="videogameCostField" layoutX="607.0" layoutY="81.0" prefHeight="19.0" prefWidth="135.0" promptText="costo" />
-                        <TextArea fx:id="videogameDescriptionField" layoutX="411.0" layoutY="195.0" prefHeight="141.0" prefWidth="365.0" promptText="descripcion" />
-                        <Button layoutX="51.0" layoutY="364.0" mnemonicParsing="false" onAction="#saveVideogame" prefHeight="30.0" prefWidth="65.0" text="Save">
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor></Button>
-                        <Button layoutX="205.0" layoutY="364.0" mnemonicParsing="false" onAction="#deleteVideogame" prefHeight="30.0" prefWidth="65.0" text="Delete">
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor></Button>
-                     </children>
-                  </AnchorPane>
-                  <AnchorPane fx:id="customersListPane" prefHeight="531.0" prefWidth="886.0" style="-fx-background-color: #131022; -fx-background-radius: 30;" stylesheets="@fullpackstyling.css">
+                  <AnchorPane fx:id="customersListPane" prefHeight="531.0" prefWidth="886.0" style="-fx-background-color: #131022; -fx-background-radius: 30;" stylesheets="@fullpackstyling.css" visible="false">
                      <children>
                         <Label layoutX="39.0" layoutY="34.0" text="Clientes  :" textFill="WHITE">
                            <font>
@@ -113,11 +87,11 @@
                               <Font size="13.0" />
                            </font>
                         </Label>
-                        <ComboBox fx:id="customersFilterComboBox" layoutX="345.0" layoutY="77.0" prefHeight="28.0" prefWidth="144.0" styleClass="combo-box" stylesheets="@fullpackstyling.css">
+                        <ComboBox fx:id="customersFilterComboBox" layoutX="401.0" layoutY="76.0" prefHeight="28.0" prefWidth="144.0" styleClass="combo-box" stylesheets="@fullpackstyling.css">
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor></ComboBox>
-                        <TextField fx:id="customersSearchField" layoutX="503.0" layoutY="78.0" promptText="Input" styleClass="combo-box" />
+                        <TextField fx:id="customersSearchField" layoutX="563.0" layoutY="75.0" promptText="Input" styleClass="combo-box" />
                         <Button layoutX="684.0" layoutY="76.0" mnemonicParsing="false" onAction="#searchCustomer" style="-fx-background-color: rgb(78, 2, 176); -fx-text-fill: rgb(250, 250, 250);" styleClass="button2" text="Search">
                            <cursor>
                               <Cursor fx:constant="HAND" />
@@ -142,7 +116,7 @@
                   </AnchorPane>
                   <AnchorPane fx:id="videoGamesListPane" prefHeight="531.0" prefWidth="886.0" style="-fx-background-color: #131022; -fx-background-radius: 30;" stylesheets="@fullpackstyling.css">
                      <children>
-                        <Label layoutX="39.0" layoutY="34.0" prefHeight="38.0" prefWidth="174.0" text="Videojuegos :" textFill="WHITE">
+                        <Label layoutX="39.0" layoutY="34.0" prefHeight="38.0" prefWidth="271.0" text="Videojuegos :" textFill="WHITE">
                            <font>
                               <Font size="26.0" />
                            </font>
@@ -200,23 +174,60 @@
                               <Cursor fx:constant="HAND" />
                            </cursor>
                         </Button>
-                        <Button layoutX="773.0" layoutY="264.0" mnemonicParsing="false" onAction="#nextPage" prefHeight="52.0" prefWidth="54.0" text="Button">
+                        <Button layoutX="773.0" layoutY="264.0" mnemonicParsing="false" onAction="#nextPage" prefHeight="52.0" prefWidth="54.0" style="-fx-background-color: rgb(78, 2, 176);" styleClass="button2">
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor></Button>
-                        <ComboBox fx:id="videogamesFilterComboBox" layoutX="357.0" layoutY="77.0" prefHeight="28.0" prefWidth="144.0" promptText="Filter" styleClass="combo-box">
+                        <ComboBox fx:id="videogamesFilterComboBox" layoutX="429.0" layoutY="76.0" prefHeight="28.0" prefWidth="144.0" promptText="Filter" styleClass="combo-box">
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor></ComboBox>
-                        <TextField fx:id="videogamesSearchField" layoutX="518.0" layoutY="78.0" promptText="Search" styleClass="combo-box" />
-                        <Button layoutX="687.0" layoutY="76.0" mnemonicParsing="false" onAction="#searchVideogame" style="-fx-background-color: rgb(78, 2, 176); -fx-text-fill: rgb(250, 250, 250);" styleClass="button2" text="Search">
+                        <TextField fx:id="videogamesSearchField" layoutX="605.0" layoutY="76.0" promptText="Search" styleClass="combo-box" />
+                        <Button layoutX="733.0" layoutY="77.0" mnemonicParsing="false" onAction="#searchVideogame" style="-fx-background-color: rgb(78, 2, 176); -fx-text-fill: rgb(250, 250, 250);" styleClass="button2" text="Search">
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor></Button>
-                        <Button layoutX="20.0" layoutY="261.0" mnemonicParsing="false" onAction="#lastPage" prefHeight="52.0" prefWidth="54.0" text="Button">
+                        <Button layoutX="20.0" layoutY="261.0" mnemonicParsing="false" onAction="#lastPage" prefHeight="52.0" prefWidth="54.0" style="-fx-background-color: rgb(78, 2, 176);" styleClass="button2">
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor></Button>
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane fx:id="videoGamePane" prefHeight="531.0" prefWidth="886.0" style="-fx-background-color: #131022; -fx-background-radius: 30;" stylesheets="@fullpackstyling.css" visible="false">
+                     <children>
+                        <TextField fx:id="videogameNameField" alignment="CENTER" layoutX="507.0" layoutY="149.0" prefHeight="27.0" prefWidth="235.0" promptText="Titulo" styleClass="textField" />
+                        <Button layoutX="46.0" layoutY="135.0" mnemonicParsing="false" onAction="#changeIcon" prefHeight="304.0" prefWidth="308.0" style="-fx-background-radius: 30; -fx-background-color: rgb(53, 178, 225);">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                           <graphic>
+                              <ImageView fx:id="formImageView" fitHeight="283.0" fitWidth="277.0" pickOnBounds="true" />
+                           </graphic>
+                        </Button>
+                        <TextField fx:id="videogameStockField" alignment="CENTER" layoutX="415.0" layoutY="204.0" prefHeight="27.0" prefWidth="191.0" promptText="stock" styleClass="textField" />
+                        <TextField fx:id="videogameTagField" alignment="CENTER" layoutX="415.0" layoutY="267.0" prefHeight="27.0" prefWidth="191.0" promptText="tag" styleClass="textField" />
+                        <TextField fx:id="videogameDevsField" alignment="CENTER" layoutX="624.0" layoutY="267.0" prefHeight="27.0" prefWidth="177.0" promptText="devs" styleClass="textField" />
+                        <TextField fx:id="videogameCostField" alignment="CENTER" layoutX="626.0" layoutY="204.0" prefHeight="27.0" prefWidth="174.0" promptText="costo" styleClass="textField" />
+                        <TextArea fx:id="videogameDescriptionField" layoutX="415.0" layoutY="322.0" prefHeight="141.0" prefWidth="384.0" promptText="descripcion" />
+                        <Button layoutX="99.0" layoutY="455.0" mnemonicParsing="false" onAction="#saveVideogame" prefHeight="30.0" prefWidth="65.0" style="-fx-background-color: rgb(78, 2, 176);" styleClass="button2" text="Save">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor></Button>
+                        <Button layoutX="237.0" layoutY="455.0" mnemonicParsing="false" onAction="#deleteVideogame" prefHeight="30.0" prefWidth="65.0" style="-fx-background-color: rgb(225, 26, 26);" styleClass="button2" text="Delete">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor></Button>
+                        <Label fx:id="contextLabel1" layoutX="24.0" layoutY="35.0" prefHeight="38.0" prefWidth="337.0" text="Compra de Videojuego :" textFill="WHITE">
+                           <font>
+                              <Font size="26.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="parragraphLabel1" layoutX="24.0" layoutY="93.0" text="Esta es toda la información acerca de este juego:" textFill="#ffea0f">
+                           <font>
+                              <Font size="13.0" />
+                           </font>
+                        </Label>
+                        <Pane layoutX="586.0" prefHeight="108.0" prefWidth="271.0" style="-fx-background-color: rgb(78, 2, 176); -fx-background-radius: 0 30 0 15;" />
                      </children>
                   </AnchorPane>
                </children>

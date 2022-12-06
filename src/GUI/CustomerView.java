@@ -121,7 +121,7 @@ public class CustomerView implements Initializable {
                 hBox.setPadding(new Insets(5, 5, 5, 10));
                 Text text = new Text(message);
                 TextFlow txtflow = new TextFlow(text);
-                txtflow.setStyle("-fx-color: rgb(239, 242, 255); " + "-fx-background-color: rgb(15, 125, 242); " + "-fx-background-radius: 20px;");
+                txtflow.setStyle("-fx-color: rgb(239, 242, 255); " + "-fx-background-color: rgb(78, 2, 176); " + "-fx-background-radius: 20px;");
                 txtflow.setPadding(new Insets(5, 10, 5, 10));
                 text.setFill(Color.color(0.934, 0.945, 0.996));
                 hBox.getChildren().add(txtflow);
@@ -145,7 +145,7 @@ public class CustomerView implements Initializable {
                     hBox.setPadding(new Insets(5, 5, 5, 10));
                     Text text = new Text(message.getText());
                     TextFlow txtflow = new TextFlow(text);
-                    txtflow.setStyle("-fx-color: rgb(239, 242, 255); " + "-fx-background-color: rgb(15, 125, 242); " + "-fx-background-radius: 20px;");
+                    txtflow.setStyle("-fx-color: rgb(239, 242, 255); " + "-fx-background-color: rgb(78, 2, 176); " + "-fx-background-radius: 20px;");
                     txtflow.setPadding(new Insets(5, 10, 5, 10));
                     text.setFill(Color.color(0.934, 0.945, 0.996));
                     hBox.getChildren().add(txtflow);
