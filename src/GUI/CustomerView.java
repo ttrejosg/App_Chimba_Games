@@ -17,6 +17,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
@@ -53,6 +54,8 @@ public class CustomerView implements Initializable {
     private ListView<String> friendsList;
     @FXML
     private ListView<String> friendsChaList;
+    @FXML
+    private StackPane stackPane;
     @FXML
     private ScrollPane spMain;
     @FXML
@@ -94,6 +97,7 @@ public class CustomerView implements Initializable {
     private ArrayList<Videogame> currentVideogames;
     private ArrayList<Button> vgButtons;
     private ArrayList<ImageView> imageViews;
+    private boolean inShop;
     private int videogamesIndex;
     public double x, y;
     private Alert alert;
@@ -109,6 +113,7 @@ public class CustomerView implements Initializable {
         this.imageViews = new ArrayList<>();
         this.currentVideogames = new ArrayList<>();
         this.videogamesIndex = 0;
+        this.inShop = false;
     }
 
     @Override
@@ -432,6 +437,15 @@ public class CustomerView implements Initializable {
     }
 
     public void showShopPane(){
+        this.inShop = true;
+        this.selectedVideogame = null;
+        this.videogamesIndex = 0;
+        shopPane.toFront();
+        indexVideoGames();
+    }
+
+    public void showVideogameLibrary(){
+        this.inShop = false;
         this.selectedVideogame = null;
         this.videogamesIndex = 0;
         shopPane.toFront();
@@ -460,7 +474,9 @@ public class CustomerView implements Initializable {
         this.resetVgButtons();
         this.currentVideogames.clear();
         int index = this.videogamesIndex*6;
-        ArrayList<Videogame> videogames =  videogameCtr.getAll();
+        ArrayList<Videogame> videogames;
+        if(inShop) videogames = videogameCtr.getAll();
+        else videogames = videogameCtr.getby("customer_id",this.customer.getId());
         int buttonsIndex = 0;
         for(int i = index; i < index+6 && i < videogames.size();i++){
             Button button = this.vgButtons.get(buttonsIndex);
@@ -480,7 +496,9 @@ public class CustomerView implements Initializable {
         String option = this.videogamesFilterComboBox.getValue();
         if(option != null) option = option.toLowerCase();
         String attribute = this.videogamesSearchField.getText();
-        ArrayList<Videogame> videogames = this.videogameCtr.getby(option, attribute);
+        ArrayList<Videogame> videogames;
+        if(inShop) videogames = this.videogameCtr.getby(option, attribute);
+        else videogames = this.videogameCtr.getby("customer_id/" + option, attribute + "/" + this.customer.getId());
         int buttonsIndex = 0;
         for(int i = index; i < index+6 && i < videogames.size();i++){
             Button button = this.vgButtons.get(buttonsIndex);
@@ -493,45 +511,71 @@ public class CustomerView implements Initializable {
     }
 
     public void nextPage(){
-        ArrayList<Videogame> videogames =  videogameCtr.getAll();
-        if(this.videogamesIndex < videogames.size()/6){
-            this.videogamesIndex++;
-            indexVideoGames();
+        if(inShop){
+            ArrayList<Videogame> videogames =  videogameCtr.getAll();
+            if(this.videogamesIndex < videogames.size()/6){
+                this.videogamesIndex++;
+                indexVideoGames();
+            }
+            System.out.println(this.videogamesIndex);
         }
-        System.out.println(this.videogamesIndex);
     }
 
     public void lastPage(){
-        if(this.videogamesIndex > 0){
-            this.videogamesIndex--;
-            indexVideoGames();
+        if(inShop){
+            if(this.videogamesIndex > 0){
+                this.videogamesIndex--;
+                indexVideoGames();
+            }
+            System.out.println(this.videogamesIndex);
+        }else{
+
         }
-        System.out.println(this.videogamesIndex);
     }
 
     public void vgButton0Action(){
-        this.selectedVideogame = this.currentVideogames.get(0);
-        this.showVideoGamePane();
+        if(inShop) {
+            this.selectedVideogame = this.currentVideogames.get(0);
+            this.showVideoGamePane();
+        }else{
+
+        }
     }
 
     public void vgButton1Action(){
-        this.selectedVideogame = this.currentVideogames.get(1);
-        this.showVideoGamePane();
+        if(inShop) {
+            this.selectedVideogame = this.currentVideogames.get(1);
+            this.showVideoGamePane();
+        }else{
+
+        }
     }
 
     public void vgButton2Action(){
-        this.selectedVideogame = this.currentVideogames.get(2);
-        this.showVideoGamePane();
+        if(inShop) {
+            this.selectedVideogame = this.currentVideogames.get(2);
+            this.showVideoGamePane();
+        }else{
+
+        }
     }
 
     public void vgButton3Action(){
-        this.selectedVideogame = this.currentVideogames.get(3);
-        this.showVideoGamePane();
+        if(inShop) {
+            this.selectedVideogame = this.currentVideogames.get(3);
+            this.showVideoGamePane();
+        }else{
+
+        }
     }
 
     public void vgButton4Action(){
-        this.selectedVideogame = this.currentVideogames.get(4);
-        this.showVideoGamePane();
+        if(inShop) {
+            this.selectedVideogame = this.currentVideogames.get(4);
+            this.showVideoGamePane();
+        }else{
+
+        }
     }
 
     public void resetVgButtons(){

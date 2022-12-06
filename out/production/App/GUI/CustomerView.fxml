@@ -61,7 +61,7 @@
                                 </ImageView>
                             </graphic>
                         </Button>
-                  <Button contentDisplay="TOP" mnemonicParsing="false" onAction="#showVideoGamePane" prefHeight="66.0" prefWidth="74.0" styleClass="button3" stylesheets="@fullpackstyling.css" text="Games" textFill="#a868a0">
+                  <Button contentDisplay="TOP" mnemonicParsing="false" onAction="#showVideogameLibrary" prefHeight="66.0" prefWidth="74.0" styleClass="button3" stylesheets="@fullpackstyling.css" text="Games" textFill="#a868a0">
                      <graphic>
                         <ImageView fitHeight="25.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -81,7 +81,7 @@
                         </Button>
                     </children>
                 </VBox>
-                <StackPane layoutX="108.0" layoutY="71.0" prefHeight="518.0" prefWidth="857.0">
+                <StackPane fx:id="stackPane" layoutX="108.0" layoutY="71.0" prefHeight="518.0" prefWidth="857.0">
                     <children>
                   <AnchorPane fx:id="chatPane" prefHeight="531.0" prefWidth="886.0" style="-fx-background-color: #131022; -fx-background-radius: 30;" stylesheets="@fullpackstyling.css">
                      <children>
@@ -107,12 +107,12 @@
                         <AnchorPane fx:id="videoGamePane" prefHeight="531.0" prefWidth="886.0" style="-fx-background-color: #131022; -fx-background-radius: 30;" stylesheets="@fullpackstyling.css" />
                   <AnchorPane fx:id="shopPane" prefHeight="531.0" prefWidth="886.0" style="-fx-background-color: #131022; -fx-background-radius: 30;" stylesheets="@fullpackstyling.css">
                      <children>
-                        <Label layoutX="39.0" layoutY="34.0" prefHeight="38.0" prefWidth="174.0" text="Videojuegos :" textFill="WHITE">
+                        <Label fx:id="contextLabel" layoutX="39.0" layoutY="34.0" prefHeight="38.0" prefWidth="174.0" text="Tienda :" textFill="WHITE">
                            <font>
                               <Font size="26.0" />
                            </font>
                         </Label>
-                        <Label layoutX="39.0" layoutY="81.0" text="Aquí puedes administrar los videojuegos de la tienda" textFill="#ffea0f">
+                        <Label fx:id="parragraphLabel" layoutX="39.0" layoutY="81.0" text="Mira los juegos que tenemos para tí !" textFill="#ffea0f">
                            <font>
                               <Font size="13.0" />
                            </font>
