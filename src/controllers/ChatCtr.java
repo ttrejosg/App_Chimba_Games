@@ -2,10 +2,13 @@ package controllers;
 
 import models.Chat;
 import models.Customer;
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import services.Service;
+
+import java.util.ArrayList;
 
 public class ChatCtr {
     Service service;
@@ -18,6 +21,18 @@ public class ChatCtr {
         JSONObject response = service.GET("chats/" + id);
         if(response != null) return new Chat(response);
         else return null;
+    }
+
+    public ArrayList<Chat> getChats(String customerId){
+        JSONArray response = service.GET_ALL("chats/customer/" + customerId);
+        ArrayList<Chat> chats = new ArrayList<>();
+        if(response != null){
+            for (Object customer : response) {
+                Chat newChat = new Chat((JSONObject) customer);
+                chats.add(newChat);
+            }
+        }
+        return chats;
     }
 
     public boolean create(Chat chat, String id1, String id2){

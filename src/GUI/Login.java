@@ -64,10 +64,9 @@ public class Login {
                     if(foundCustomer.isOnline()) this.showMessageDialog("Sign In","user already logged in another dispostive");
                     else{
                         foundCustomer.setOnline(true);
-                        changeToCustomerView(event);
+                        changeToCustomerView(event,foundCustomer);
                     }
-                }
-                else{
+                } else{
                     this.showMessageDialog("Sign In","Wrong username or password");
                     this.resetFields();
                 }
@@ -142,11 +141,13 @@ public class Login {
         this.stage.show();
     }
 
-    public void changeToCustomerView(ActionEvent e) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("CustomerView"));
+    public void changeToCustomerView(ActionEvent e, Customer customer) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("CustomerView.fxml"));
         Parent root = loader.load();
         CustomerView customerView= loader.getController();
         customerView.setService(this.service);
+        customerView.setInformation(customer);
+        customerView.fillTable();
         stage = (Stage)((Node)e.getSource()).getScene().getWindow();
         scene = new Scene(root);
         scene.setFill(Color.TRANSPARENT);

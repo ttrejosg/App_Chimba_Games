@@ -25,7 +25,7 @@ public class Customer extends User{
         this.description = "";
         this.age = age;
         this.online = false;
-        this.avatar = "ruta por defecto";
+        this.avatar = "/Images/logo.png";
         this.chats = new ArrayList<>();
         this.bills = new ArrayList<>();
     }

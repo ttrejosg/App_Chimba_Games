@@ -94,7 +94,9 @@ public class CustomerCtr {
 
     public Customer getByUsername(String username){
         JSONArray response = service.GET_ALL("customers/username/" + username);
-        if(!response.isEmpty()) return new Customer((JSONObject)response.get(0));
+        if(!response.isEmpty()) {
+            return new Customer((JSONObject)response.get(0));
+        }
         else return null;
     }
 

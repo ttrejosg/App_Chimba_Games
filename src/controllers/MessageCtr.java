@@ -3,10 +3,13 @@ package controllers;
 import models.Customer;
 import models.Message;
 import models.Videogame;
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import services.Service;
+
+import java.util.ArrayList;
 
 public class MessageCtr {
     Service service;
@@ -21,9 +24,21 @@ public class MessageCtr {
         else return null;
     }
 
-    public boolean create(Message message, String chatId){
+    public ArrayList<Message> getMessages(String chatId){
+        JSONArray response = service.GET_ALL("messages/chat/" + chatId);
+        ArrayList<Message> messages= new ArrayList<>();
+        if(response != null){
+            for (Object message : response) {
+                Message newMessage = new Message((JSONObject) message);
+                messages.add(newMessage);
+            }
+        }
+        return messages;
+    }
+
+    public boolean create(Message message, String chatId, String customerId){
         boolean created = false;
-        String response = service.POST("videogames/chat/" + chatId, message.toJSON());
+        String response = service.POST("messages/chat/" + chatId + "/customer/" + customerId, message.toJSON());
         try{
             JSONParser JSONParser = new JSONParser();
             JSONObject jsonObject = (JSONObject) JSONParser.parse(response.toString());
@@ -36,7 +51,7 @@ public class MessageCtr {
     }
 
 
-    public boolean delet(String id){
+    public boolean delete(String id){
         String response = service.DELETE("messages/" + id);
         return response == "";
     }

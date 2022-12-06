@@ -204,6 +204,7 @@ public class AdminView implements Initializable {
     public void showVideoGamePane(){
         if(this.selectedVideogame != null){
             this.videogameNameField.setText(this.selectedVideogame.getName());
+            this.formImageView.setImage(new Image(this.selectedVideogame.getCover()));
             this.videogameTagField.setText(this.selectedVideogame.getTag());
             this.videogameCostField.setText(this.selectedVideogame.getCost() + "");
             this.videogameDevsField.setText(this.selectedVideogame.getDevs());
@@ -324,10 +325,8 @@ public class AdminView implements Initializable {
         String tag = this.videogameTagField.getText();
         String devs = this.videogameDevsField.getText();
         String cover = this.formImageView.getImage().getUrl();
-        System.out.println(cover);
         int i = cover.indexOf("/Images");
         cover = cover.substring(i);
-        System.out.println(cover);
         String description = this.videogameDescriptionField.getText();
         double cost = -1;
         long stock = -1;
