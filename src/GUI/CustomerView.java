@@ -24,10 +24,7 @@ import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import models.Chat;
-import models.Customer;
-import models.Message;
-import models.Videogame;
+import models.*;
 import services.Service;
 
 import java.io.File;
@@ -35,6 +32,7 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.ResourceBundle;
 
 public class CustomerView implements Initializable {
@@ -45,11 +43,11 @@ public class CustomerView implements Initializable {
     @FXML
     private TextField inAge, inCellphone, inEmail, inLastname, inName, inPassword, inUsername;
     @FXML
-    private TextArea inDescription, frDescription;
+    private TextArea inDescription, frDescription, videogameDescriptionField;
     @FXML
     private Label name, labelChat;
     @FXML
-    private TextField frAge, frCellphone, frEmail, frLastname, frName, searchFriend;
+    private TextField frAge, frCellphone, frEmail, frLastname, frName, searchFriend, inputMessage;
     @FXML
     private ListView<String> friendsList;
     @FXML
@@ -61,35 +59,17 @@ public class CustomerView implements Initializable {
     @FXML
     private VBox vboxMessages;
     @FXML
-    private TextField inputMessage;
+    private Button vgButton, vgButton0, vgButton1, vgButton2, vgButton3, vgButton4;
     @FXML
-    private Button vgButton;
-    @FXML
-    private Button vgButton0;
-    @FXML
-    private Button vgButton1;
-    @FXML
-    private Button vgButton2;
-    @FXML
-    private Button vgButton3;
-    @FXML
-    private Button vgButton4;
-    @FXML
-    private ImageView imageView;
-    @FXML
-    private ImageView imageView0;
-    @FXML
-    private ImageView imageView1;
-    @FXML
-    private ImageView imageView2;
-    @FXML
-    private ImageView imageView3;
-    @FXML
-    private ImageView imageView4;
+    private ImageView imageView, imageView0, imageView1, imageView2, imageView3, imageView4, formImageView;
     @FXML
     private TextField videogamesSearchField;
     @FXML
     private ComboBox<String> videogamesFilterComboBox;
+    @FXML
+    private TextField videogameCostField, videogameDevsField, videogameNameField, videogameStockField, videogameTagField;
+
+
     private Stage stage; Scene scene; Parent root;
     private CustomerCtr customerCtr; VideogameCtr videogameCtr; ChatCtr chatCtr; MessageCtr messageCtr; BillCtr billCtr;
     private Customer customer; Service service; Customer friend; ArrayList<Chat> chats;
@@ -132,7 +112,9 @@ public class CustomerView implements Initializable {
         int index = this.friendsChaList.getSelectionModel().getSelectedIndex();
         Chat currentChat = this.chats.get(index);
         if(!message.isEmpty()){
-            Message new_message = new Message("", this.customer, message);
+            Date date = new Date();
+            String dateS = date.getDay() + "/" + date.getMonth() + "/" + date.getYear() + "";
+            Message new_message = new Message(dateS, this.customer, message);
             if(messageCtr.create(new_message, currentChat.getId(), this.customer.getId())){
                 HBox hBox = new HBox();
                 hBox.setAlignment(Pos.CENTER_RIGHT);
@@ -144,6 +126,7 @@ public class CustomerView implements Initializable {
                 text.setFill(Color.color(0.934, 0.945, 0.996));
                 hBox.getChildren().add(txtflow);
                 vboxMessages.getChildren().add(hBox);
+                this.chats = this.chatCtr.getChats(this.customer.getId());
             }
             inputMessage.clear();
         }
@@ -151,50 +134,53 @@ public class CustomerView implements Initializable {
 
     public void loadMessages(ObservableValue<? extends String> observable, String oldVal, String newVal){
         int index = this.friendsChaList.getSelectionModel().getSelectedIndex();
-        Chat currentChat = this.chats.get(index);
-        ArrayList<Message> messages = this.messageCtr.getMessages(currentChat.getId());
-        vboxMessages.getChildren().clear();
-        for(Message message: messages){
-            if(message.getCustomer().getId().equals(this.customer.getId())){
-                HBox hBox = new HBox();
-                hBox.setAlignment(Pos.CENTER_RIGHT);
-                hBox.setPadding(new Insets(5, 5, 5, 10));
-                Text text = new Text(message.getText());
-                TextFlow txtflow = new TextFlow(text);
-                txtflow.setStyle("-fx-color: rgb(239, 242, 255); " + "-fx-background-color: rgb(15, 125, 242); " + "-fx-background-radius: 20px;");
-                txtflow.setPadding(new Insets(5, 10, 5, 10));
-                text.setFill(Color.color(0.934, 0.945, 0.996));
-                hBox.getChildren().add(txtflow);
-                vboxMessages.getChildren().add(hBox);
+        if(index != -1){
+            Chat currentChat = this.chats.get(index);
+            ArrayList<Message> messages = this.messageCtr.getMessages(currentChat.getId());
+            vboxMessages.getChildren().clear();
+            for(Message message: messages){
+                if(message.getCustomer().getId().equals(this.customer.getId())){
+                    HBox hBox = new HBox();
+                    hBox.setAlignment(Pos.CENTER_RIGHT);
+                    hBox.setPadding(new Insets(5, 5, 5, 10));
+                    Text text = new Text(message.getText());
+                    TextFlow txtflow = new TextFlow(text);
+                    txtflow.setStyle("-fx-color: rgb(239, 242, 255); " + "-fx-background-color: rgb(15, 125, 242); " + "-fx-background-radius: 20px;");
+                    txtflow.setPadding(new Insets(5, 10, 5, 10));
+                    text.setFill(Color.color(0.934, 0.945, 0.996));
+                    hBox.getChildren().add(txtflow);
+                    vboxMessages.getChildren().add(hBox);
+                }else{
+                    HBox hBox = new HBox();
+                    hBox.setAlignment(Pos.CENTER_LEFT);
+                    hBox.setPadding(new Insets(5, 5, 5, 10));
+                    Text text = new Text(message.getText());
+                    TextFlow txtflow = new TextFlow(text);
+                    txtflow.setStyle("-fx-background-color: rgb(233, 233, 235); " + "-fx-background-radius: 20px;");
+                    txtflow.setPadding(new Insets(5, 10, 5, 10));
+                    hBox.getChildren().add(txtflow);
+                    vboxMessages.getChildren().add(hBox);
+                }
+            }
+
+            String txt = "";
+            if(currentChat.getCustomer1().getId().equals(this.customer.getId())){
+                txt += currentChat.getCustomer2().getUsername();
+                if(currentChat.getCustomer2().isOnline()) txt += " / Online";
+                else txt += " / Offline";
+                this.labelChat.setText(txt);
+                Image image = new Image(currentChat.getCustomer2().getAvatar());
+                this.chatIcon.setImage(image);
             }else{
-                HBox hBox = new HBox();
-                hBox.setAlignment(Pos.CENTER_LEFT);
-                hBox.setPadding(new Insets(5, 5, 5, 10));
-                Text text = new Text(message.getText());
-                TextFlow txtflow = new TextFlow(text);
-                txtflow.setStyle("-fx-background-color: rgb(233, 233, 235); " + "-fx-background-radius: 20px;");
-                txtflow.setPadding(new Insets(5, 10, 5, 10));
-                hBox.getChildren().add(txtflow);
-                vboxMessages.getChildren().add(hBox);
+                txt += currentChat.getCustomer1().getUsername();
+                if(currentChat.getCustomer1().isOnline()) txt += " / Online";
+                else txt += " / Offline";
+                this.labelChat.setText(txt);
+                Image image = new Image(currentChat.getCustomer1().getAvatar());
+                this.chatIcon.setImage(image);
             }
         }
 
-        String txt = "";
-        if(currentChat.getCustomer1().getId().equals(this.customer.getId())){
-            txt += currentChat.getCustomer2().getUsername();
-            if(currentChat.getCustomer2().isOnline()) txt += " / Online";
-            else txt += " / Offline";
-            this.labelChat.setText(txt);
-            Image image = new Image(currentChat.getCustomer2().getAvatar());
-            this.chatIcon.setImage(image);
-        }else{
-            txt += currentChat.getCustomer1().getUsername();
-            if(currentChat.getCustomer1().isOnline()) txt += " / Online";
-            else txt += " / Offline";
-            this.labelChat.setText(txt);
-            Image image = new Image(currentChat.getCustomer1().getAvatar());
-            this.chatIcon.setImage(image);
-        }
     }
 
     public void fillChatTable(){
@@ -279,9 +265,6 @@ public class CustomerView implements Initializable {
     public void showProfilePane(){
         profilePane.toFront();
     }
-    public void showGamesListPane(){
-        shopPane.toFront();
-    }
 
     public void showChatPane(){
         this.fillChatTable();
@@ -362,10 +345,6 @@ public class CustomerView implements Initializable {
             }
         }
     }
-
-    public void showVideoGamePane(){
-        videoGamePane.toFront();
-    }
     public void backToLogin(ActionEvent e) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("Login.fxml"));
         Parent root = loader.load();
@@ -417,6 +396,31 @@ public class CustomerView implements Initializable {
         }
     }
 
+    public void buyVideogame(){
+        if(this.selectedVideogame != null){
+            ArrayList<Bill> bills = this.billCtr.getBills(this.customer.getId());
+            boolean alreadyBuy = false;
+            for(Bill bill: bills){
+                if (bill.getVideogame().getId().equals(this.selectedVideogame.getId())) {
+                    alreadyBuy = true;
+                    break;
+                }
+            }
+            if(!alreadyBuy){
+                Date date = new Date();
+                String dateS = date.getDay() + "/" + date.getMonth() + "/" + date.getYear() + "";
+                Bill bill = new Bill(dateS, this.customer, this.selectedVideogame);
+                if(this.billCtr.create(bill, this.customer.getId(), this.selectedVideogame.getId())){
+                    this.showMessageDialog("Buy Game", "Videogame added");
+                    this.showShopPane();
+                }else this.showMessageDialog("Buy Game", "Could not add videogame");
+            }else {
+                this.showMessageDialog("Buy Game", "You already have this game");
+                this.showShopPane();
+            }
+        } else this.showMessageDialog("Buy Game", "You must select a  videogame");
+    }
+
     // shop Pane
 
     public void initVideogamesView(){
@@ -452,23 +456,29 @@ public class CustomerView implements Initializable {
         indexVideoGames();
     }
 
-//    public void showCustomersListPane(){
-//        customersListPane.toFront();
-//        this.setTable();
-//    }
+    public void showVideoGamePane(){
+        videoGamePane.toFront();
+        if(this.selectedVideogame != null){
+            this.videogameNameField.setText(this.selectedVideogame.getName());
+            this.formImageView.setImage(new Image(this.selectedVideogame.getCover()));
+            this.videogameTagField.setText(this.selectedVideogame.getTag());
+            this.videogameCostField.setText(this.selectedVideogame.getCost() + "");
+            this.videogameDevsField.setText(this.selectedVideogame.getDevs());
+            this.videogameDescriptionField.setText(this.selectedVideogame.getDescription());
+            this.videogameStockField.setText(this.selectedVideogame.getStock() + "");
+        }else this.resetVideogameFields();
+        videoGamePane.toFront();
+    }
 
-//    public void showVideoGamePane(){
-//        if(this.selectedVideogame != null){
-//            this.videogameNameField.setText(this.selectedVideogame.getName());
-//            this.formImageView.setImage(new Image(this.selectedVideogame.getCover()));
-//            this.videogameTagField.setText(this.selectedVideogame.getTag());
-//            this.videogameCostField.setText(this.selectedVideogame.getCost() + "");
-//            this.videogameDevsField.setText(this.selectedVideogame.getDevs());
-//            this.videogameDescriptionField.setText(this.selectedVideogame.getDescription());
-//            this.videogameStockField.setText(this.selectedVideogame.getStock() + "");
-//        }else this.resetVideogameFields();
-//        videoGamePane.toFront();
-//    }
+    public void resetVideogameFields(){
+        this.videogameNameField.clear();
+        this.videogameTagField.clear();
+        this.videogameCostField.clear();
+        this.videogameDevsField.clear();
+        this.videogameDescriptionField.clear();
+        this.videogameStockField.clear();
+        this.formImageView.setImage(new Image("/Images/logo.png"));
+    }
 
     public void indexVideoGames(){
         this.resetVgButtons();
