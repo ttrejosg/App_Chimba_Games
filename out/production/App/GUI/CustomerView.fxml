@@ -83,7 +83,7 @@
                 </VBox>
                 <StackPane fx:id="stackPane" layoutX="108.0" layoutY="71.0" prefHeight="518.0" prefWidth="857.0">
                     <children>
-                  <AnchorPane fx:id="chatPane" prefHeight="531.0" prefWidth="886.0" style="-fx-background-color: #131022; -fx-background-radius: 30;" stylesheets="@fullpackstyling.css">
+                  <AnchorPane fx:id="chatPane" prefHeight="531.0" prefWidth="886.0" style="-fx-background-color: #131022; -fx-background-radius: 30;" stylesheets="@fullpackstyling.css" visible="false">
                      <children>
                         <ScrollPane fx:id="spMain" layoutX="228.0" layoutY="67.0" prefHeight="382.0" prefWidth="615.0">
                            <content>
@@ -112,15 +112,20 @@
                                 <TextField fx:id="videogameDevsField" layoutX="607.0" layoutY="144.0" prefHeight="19.0" prefWidth="135.0" promptText="devs" />
                                 <TextField fx:id="videogameCostField" layoutX="607.0" layoutY="81.0" prefHeight="19.0" prefWidth="135.0" promptText="costo" />
                                 <TextArea fx:id="videogameDescriptionField" layoutX="411.0" layoutY="195.0" prefHeight="141.0" prefWidth="365.0" promptText="descripcion" />
-                                <Button layoutX="134.0" layoutY="368.0" mnemonicParsing="false" onAction="#buyVideogame" prefHeight="30.0" prefWidth="65.0" text="Buy">
+                                <Button fx:id="buyButton" layoutX="134.0" layoutY="368.0" mnemonicParsing="false" onAction="#buyVideogame" prefHeight="30.0" prefWidth="65.0" text="Buy">
                                     <cursor>
                                         <Cursor fx:constant="HAND" />
                                     </cursor>
                                 </Button>
                                 <ImageView fx:id="formImageView" fitHeight="232.0" fitWidth="256.0" layoutX="34.0" layoutY="120.0" pickOnBounds="true" preserveRatio="true" />
+                        <Button layoutX="20.0" layoutY="14.0" mnemonicParsing="false" onAction="#backToGames" prefHeight="30.0" prefWidth="65.0" text="back">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Button>
                             </children>
                         </AnchorPane>
-                  <AnchorPane fx:id="shopPane" prefHeight="531.0" prefWidth="886.0" style="-fx-background-color: #131022; -fx-background-radius: 30;" stylesheets="@fullpackstyling.css">
+                  <AnchorPane fx:id="shopPane" prefHeight="531.0" prefWidth="886.0" style="-fx-background-color: #131022; -fx-background-radius: 30;" stylesheets="@fullpackstyling.css" visible="false">
                      <children>
                         <Label fx:id="contextLabel" layoutX="39.0" layoutY="34.0" prefHeight="38.0" prefWidth="174.0" text="Tienda :" textFill="WHITE">
                            <font>
@@ -203,7 +208,7 @@
                         </Button>
                      </children>
                   </AnchorPane>
-                        <AnchorPane fx:id="profilePane" prefHeight="531.0" prefWidth="886.0" style="-fx-background-color: #131022; -fx-background-radius: 30;" stylesheets="@fullpackstyling.css">
+                        <AnchorPane fx:id="profilePane" prefHeight="531.0" prefWidth="886.0" style="-fx-background-color: #131022; -fx-background-radius: 30;" stylesheets="@fullpackstyling.css" visible="false">
                             <children>
                                 <Label layoutX="39.0" layoutY="34.0" text="Profile  :" textFill="WHITE">
                                     <font>

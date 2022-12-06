@@ -243,7 +243,7 @@ public class AdminView implements Initializable {
         for(int i = index; i < index+5 && i < videogames.size();i++){
             Button button = this.vgButtons.get(buttonsIndex);
             Videogame videogame = videogames.get(i);
-            imageViews.get(i).setImage(new Image(videogame.getCover()));
+            imageViews.get(buttonsIndex).setImage(new Image(videogame.getCover()));
             button.setVisible(true);
             this.currentVideogames.add(videogame);
             buttonsIndex++;
@@ -263,7 +263,7 @@ public class AdminView implements Initializable {
         for(int i = index; i < index+5 && i < videogames.size();i++){
             Button button = this.vgButtons.get(buttonsIndex);
             Videogame videogame = videogames.get(i);
-            imageViews.get(i).setImage(new Image(videogame.getCover()));
+            imageViews.get(buttonsIndex).setImage(new Image(videogame.getCover()));
             button.setVisible(true);
             this.currentVideogames.add(videogame);
             buttonsIndex++;
