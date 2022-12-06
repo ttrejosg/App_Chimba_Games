@@ -3,8 +3,6 @@ package GUI;
 import controllers.*;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -25,9 +23,7 @@ import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import models.Chat;
-import models.Customer;
-import models.Message;
+import models.*;
 import services.Service;
 
 import java.io.File;
@@ -35,21 +31,22 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.ResourceBundle;
 
 public class CustomerView implements Initializable {
     @FXML
-    private AnchorPane profilePane, scenePane, videoGamePane, videoGamesListPane, chatPane;
+    private AnchorPane profilePane, scenePane, videoGamePane, shopPane, chatPane;
     @FXML
     private ImageView icon, chatIcon;
     @FXML
     private TextField inAge, inCellphone, inEmail, inLastname, inName, inPassword, inUsername;
     @FXML
-    private TextArea inDescription, frDescription;
+    private TextArea inDescription, frDescription, videogameDescriptionField;
     @FXML
     private Label name, labelChat;
     @FXML
-    private TextField frAge, frCellphone, frEmail, frLastname, frName, searchFriend;
+    private TextField frAge, frCellphone, frEmail, frLastname, frName, searchFriend, inputMessage;
     @FXML
     private ListView<String> friendsList;
     @FXML
@@ -59,10 +56,25 @@ public class CustomerView implements Initializable {
     @FXML
     private VBox vboxMessages;
     @FXML
-    private TextField inputMessage;
+    private Button vgButton, vgButton0, vgButton1, vgButton2, vgButton3, vgButton4;
+    @FXML
+    private ImageView imageView, imageView0, imageView1, imageView2, imageView3, imageView4, formImageView;
+    @FXML
+    private TextField videogamesSearchField;
+    @FXML
+    private ComboBox<String> videogamesFilterComboBox;
+    @FXML
+    private TextField videogameCostField, videogameDevsField, videogameNameField, videogameStockField, videogameTagField;
+
+
     private Stage stage; Scene scene; Parent root;
     private CustomerCtr customerCtr; VideogameCtr videogameCtr; ChatCtr chatCtr; MessageCtr messageCtr; BillCtr billCtr;
     private Customer customer; Service service; Customer friend; ArrayList<Chat> chats;
+    private Videogame selectedVideogame;
+    private ArrayList<Videogame> currentVideogames;
+    private ArrayList<Button> vgButtons;
+    private ArrayList<ImageView> imageViews;
+    private int videogamesIndex;
     public double x, y;
     private Alert alert;
 
@@ -73,6 +85,10 @@ public class CustomerView implements Initializable {
         this.messageCtr = new MessageCtr();
         this.billCtr = new BillCtr();
         this.alert = new Alert(Alert.AlertType.INFORMATION);
+        this.vgButtons = new ArrayList<>();
+        this.imageViews = new ArrayList<>();
+        this.currentVideogames = new ArrayList<>();
+        this.videogamesIndex = 0;
     }
 
     @Override
@@ -83,6 +99,7 @@ public class CustomerView implements Initializable {
                 spMain.setVvalue((Double) newValue);
             }
         });
+        initVideogamesView();
     }
 
     public void send(){
@@ -90,7 +107,9 @@ public class CustomerView implements Initializable {
         int index = this.friendsChaList.getSelectionModel().getSelectedIndex();
         Chat currentChat = this.chats.get(index);
         if(!message.isEmpty()){
-            Message new_message = new Message("", this.customer, message);
+            Date date = new Date();
+            String dateS = date.getDay() + "/" + date.getMonth() + "/" + date.getYear() + "";
+            Message new_message = new Message(dateS, this.customer, message);
             if(messageCtr.create(new_message, currentChat.getId(), this.customer.getId())){
                 HBox hBox = new HBox();
                 hBox.setAlignment(Pos.CENTER_RIGHT);
@@ -169,6 +188,7 @@ public class CustomerView implements Initializable {
             if(this.customer.getId().equals(chats.get(i).getCustomer1().getId()))friends[i] = chats.get(i).getCustomer2().getUsername();
             else friends[i] = chats.get(i).getCustomer1().getUsername();
         }
+
         this.friendsChaList.getItems().setAll(friends);
         this.friendsChaList.getSelectionModel().selectedItemProperty().addListener(this::loadMessages);
     }
@@ -239,9 +259,6 @@ public class CustomerView implements Initializable {
 
     public void showProfilePane(){
         profilePane.toFront();
-    }
-    public void showGamesListPane(){
-        videoGamesListPane.toFront();
     }
 
     public void showChatPane(){
@@ -323,10 +340,6 @@ public class CustomerView implements Initializable {
             }
         }
     }
-
-    public void showVideoGamePane(){
-        videoGamePane.toFront();
-    }
     public void backToLogin(ActionEvent e) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("Login.fxml"));
         Parent root = loader.load();
@@ -375,6 +388,165 @@ public class CustomerView implements Initializable {
         this.customer = customer;
         if(this.customerCtr.edit(this.customer)){
             this.name.setText(customer.getName() + " / Online");
+        }
+    }
+
+    public void buyVideogame(){
+        if(this.selectedVideogame != null){
+            ArrayList<Bill> bills = this.billCtr.getBills(this.customer.getId());
+            boolean alreadyBuy = false;
+            for(Bill bill: bills){
+                if (bill.getVideogame().getId().equals(this.selectedVideogame.getId())) {
+                    alreadyBuy = true;
+                    break;
+                }
+            }
+            if(!alreadyBuy){
+                Date date = new Date();
+                String dateS = date.getDay() + "/" + date.getMonth() + "/" + date.getYear() + "";
+                Bill bill = new Bill(dateS, this.customer, this.selectedVideogame);
+                if(this.billCtr.create(bill, this.customer.getId(), this.selectedVideogame.getId())){
+                    this.showMessageDialog("Buy Game", "Videogame added");
+                    this.showShopPane();
+                }else this.showMessageDialog("Buy Game", "Could not add videogame");
+            }else {
+                this.showMessageDialog("Buy Game", "You already have this game");
+                this.showShopPane();
+            }
+        } else this.showMessageDialog("Buy Game", "You must select a  videogame");
+    }
+
+    // shop Pane
+
+    public void initVideogamesView(){
+        this.vgButtons.add(vgButton);
+        this.vgButtons.add(vgButton0);
+        this.vgButtons.add(vgButton1);
+        this.vgButtons.add(vgButton2);
+        this.vgButtons.add(vgButton3);
+        this.vgButtons.add(vgButton4);
+        this.imageViews.add(imageView);
+        this.imageViews.add(imageView0);
+        this.imageViews.add(imageView1);
+        this.imageViews.add(imageView2);
+        this.imageViews.add(imageView3);
+        this.imageViews.add(imageView4);
+        String[] options = {"Name", "Tag", "Devs", "Cost", "Stock"};
+        this.videogamesFilterComboBox.getItems().addAll(options);
+    }
+
+    public void showShopPane(){
+        this.selectedVideogame = null;
+        this.videogamesIndex = 0;
+        shopPane.toFront();
+        indexVideoGames();
+    }
+
+    public void showVideoGamePane(){
+        videoGamePane.toFront();
+        if(this.selectedVideogame != null){
+            this.videogameNameField.setText(this.selectedVideogame.getName());
+            this.formImageView.setImage(new Image(this.selectedVideogame.getCover()));
+            this.videogameTagField.setText(this.selectedVideogame.getTag());
+            this.videogameCostField.setText(this.selectedVideogame.getCost() + "");
+            this.videogameDevsField.setText(this.selectedVideogame.getDevs());
+            this.videogameDescriptionField.setText(this.selectedVideogame.getDescription());
+            this.videogameStockField.setText(this.selectedVideogame.getStock() + "");
+        }else this.resetVideogameFields();
+        videoGamePane.toFront();
+    }
+
+    public void resetVideogameFields(){
+        this.videogameNameField.clear();
+        this.videogameTagField.clear();
+        this.videogameCostField.clear();
+        this.videogameDevsField.clear();
+        this.videogameDescriptionField.clear();
+        this.videogameStockField.clear();
+        this.formImageView.setImage(new Image("/Images/logo.png"));
+    }
+
+    public void indexVideoGames(){
+        this.resetVgButtons();
+        this.currentVideogames.clear();
+        int index = this.videogamesIndex*6;
+        ArrayList<Videogame> videogames =  videogameCtr.getAll();
+        int buttonsIndex = 0;
+        for(int i = index; i < index+6 && i < videogames.size();i++){
+            Button button = this.vgButtons.get(buttonsIndex);
+            Videogame videogame = videogames.get(i);
+            imageViews.get(i).setImage(new Image(videogame.getCover()));
+            button.setVisible(true);
+            this.currentVideogames.add(videogame);
+            buttonsIndex++;
+        }
+    }
+
+    public void searchVideogame(){
+        this.videogamesIndex = 0;
+        this.resetVgButtons();
+        this.currentVideogames.clear();
+        int index = this.videogamesIndex*6;
+        String option = this.videogamesFilterComboBox.getValue();
+        if(option != null) option = option.toLowerCase();
+        String attribute = this.videogamesSearchField.getText();
+        ArrayList<Videogame> videogames = this.videogameCtr.getby(option, attribute);
+        int buttonsIndex = 0;
+        for(int i = index; i < index+6 && i < videogames.size();i++){
+            Button button = this.vgButtons.get(buttonsIndex);
+            Videogame videogame = videogames.get(i);
+            imageViews.get(i).setImage(new Image(videogame.getCover()));
+            button.setVisible(true);
+            this.currentVideogames.add(videogame);
+            buttonsIndex++;
+        }
+    }
+
+    public void nextPage(){
+        ArrayList<Videogame> videogames =  videogameCtr.getAll();
+        if(this.videogamesIndex < videogames.size()/6){
+            this.videogamesIndex++;
+            indexVideoGames();
+        }
+        System.out.println(this.videogamesIndex);
+    }
+
+    public void lastPage(){
+        if(this.videogamesIndex > 0){
+            this.videogamesIndex--;
+            indexVideoGames();
+        }
+        System.out.println(this.videogamesIndex);
+    }
+
+    public void vgButton0Action(){
+        this.selectedVideogame = this.currentVideogames.get(0);
+        this.showVideoGamePane();
+    }
+
+    public void vgButton1Action(){
+        this.selectedVideogame = this.currentVideogames.get(1);
+        this.showVideoGamePane();
+    }
+
+    public void vgButton2Action(){
+        this.selectedVideogame = this.currentVideogames.get(2);
+        this.showVideoGamePane();
+    }
+
+    public void vgButton3Action(){
+        this.selectedVideogame = this.currentVideogames.get(3);
+        this.showVideoGamePane();
+    }
+
+    public void vgButton4Action(){
+        this.selectedVideogame = this.currentVideogames.get(4);
+        this.showVideoGamePane();
+    }
+
+    public void resetVgButtons(){
+        for(Button button : vgButtons){
+            button.setVisible(false);
         }
     }
 }

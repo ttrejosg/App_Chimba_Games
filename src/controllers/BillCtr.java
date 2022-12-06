@@ -1,10 +1,14 @@
 package controllers;
 
 import models.Bill;
+import models.Chat;
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import services.Service;
+
+import java.util.ArrayList;
 
 public class BillCtr {
     Service service;
@@ -16,6 +20,18 @@ public class BillCtr {
         JSONObject response = service.GET("bills/" + id);
         if(response != null) return new Bill(response);
         else return null;
+    }
+
+    public ArrayList<Bill> getBills(String customerId){
+        JSONArray response = service.GET_ALL("bills/customer/" + customerId);
+        ArrayList<Bill> bills = new ArrayList<>();
+        if(response != null){
+            for (Object bill : response) {
+                Bill new_bill = new Bill((JSONObject) bill);
+                bills.add(new_bill);
+            }
+        }
+        return bills;
     }
 
     public boolean create(Bill bill, String customerId, String videogameId){
