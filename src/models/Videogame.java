@@ -7,15 +7,17 @@ import java.util.ArrayList;
 public class Videogame {
     private String id;
     private String name;
+    private String cover;
     private String tag;
     private String devs;
     private double cost;
-    private int stock;
+    private long stock;
     private String description;
     private ArrayList<Bill> bills;
 
-    public Videogame(String name, String tag, String devs, double cost, int stock, String description) {
+    public Videogame(String name, String tag, String devs, double cost, long stock, String description) {
         this.name = name;
+        this.cover = "/Images/God_of_War_4_cover.jpg";
         this.tag = tag;
         this.devs = devs;
         this.cost = cost;
@@ -24,14 +26,15 @@ public class Videogame {
         this.bills = new ArrayList<>();
     }
 
-    public Videogame(JSONObject videomageJSON){
-        this.id = (String) videomageJSON.get("_id");
-        this.name = (String) videomageJSON.get("name");
-        this.tag = (String) videomageJSON.get("tag");
-        this.devs = (String) videomageJSON.get("devs");
-        this.cost = (double) videomageJSON.get("cost");
-        this.stock = (int) videomageJSON.get("stock");
-        this.description = (String) videomageJSON.get("description");
+    public Videogame(JSONObject videogameJSON){
+        this.id = (String) videogameJSON.get("_id");
+        this.name = (String) videogameJSON.get("name");
+        this.cover = (String) videogameJSON.get("cover");
+        this.tag = (String) videogameJSON.get("tag");
+        this.devs = (String) videogameJSON.get("devs");
+        this.cost = (Double) videogameJSON.get("cost");
+        this.stock = (Long) videogameJSON.get("stock");
+        this.description = (String) videogameJSON.get("description");
         this.bills = new ArrayList<>();
     }
 
@@ -40,6 +43,7 @@ public class Videogame {
     public JSONObject toJSON(){
         JSONObject result = new JSONObject();
         result.put("name", this.name);
+        result.put("cover",this.cover);
         result.put("tag",this.tag);
         result.put("devs", this.devs);
         result.put("cost", this.cost);
@@ -89,11 +93,11 @@ public class Videogame {
         this.cost = cost;
     }
 
-    public int getStock() {
+    public long getStock() {
         return stock;
     }
 
-    public void setStock(int stock) {
+    public void setStock(long stock) {
         this.stock = stock;
     }
 
@@ -111,5 +115,13 @@ public class Videogame {
 
     public void setBills(ArrayList<Bill> bills) {
         this.bills = bills;
+    }
+
+    public String getCover() {
+        return cover;
+    }
+
+    public void setCover(String cover) {
+        this.cover = cover;
     }
 }

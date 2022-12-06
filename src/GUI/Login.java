@@ -59,8 +59,14 @@ public class Login {
             try {
                 Admin foundAdmin = this.adminCtr.getByUsername(username);
                 Customer foundCustomer = this.customerCtr.getByUsername(username);
-                if(foundAdmin != null && foundAdmin.getPassword().equals(password)) changeToAdminView(event);
-                else if(foundCustomer != null && foundCustomer.getPassword().equals(password)) changeToCustomerView(event);
+                if(foundAdmin != null && foundAdmin.getPassword().equals(password))changeToAdminView(event);
+                else if(foundCustomer != null && foundCustomer.getPassword().equals(password)){
+                    if(foundCustomer.isOnline()) this.showMessageDialog("Sign In","user already logged in another dispostive");
+                    else{
+                        foundCustomer.setOnline(true);
+                        changeToCustomerView(event);
+                    }
+                }
                 else{
                     this.showMessageDialog("Sign In","Wrong username or password");
                     this.resetFields();
@@ -87,12 +93,14 @@ public class Login {
         }
         String description = this.upDescription.getText();
         if(!username.isBlank() && !password.isBlank() && !name.isBlank() && !lastname.isBlank() && !cellphone.isBlank() && !email.isBlank() && age != 0){
-            Customer customer = new Customer(username,password,name,lastname,cellphone,email,age);
-            customer.setDescription(description);
-            if(this.customerCtr.create(customer)){
-                this.showMessageDialog("Sign Up","You are Sing Up");
-                this.back();
-            }else System.out.println("Error al crear customer");
+            if(this.customerCtr.getByUsername(username) == null){
+                Customer customer = new Customer(username,password,name,lastname,cellphone,email,age);
+                customer.setDescription(description);
+                if(this.customerCtr.create(customer)){
+                    this.showMessageDialog("Sign Up","You are Sing Up");
+                    this.back();
+                }else System.out.println("Error al crear customer");
+            }else this.showMessageDialog("Sign Up","The username is already in use");
         }else this.showMessageDialog("Sign Up","There are incomplete Fields");
     }
 
