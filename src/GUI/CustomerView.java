@@ -126,7 +126,7 @@ public class CustomerView implements Initializable {
                 hBox.setPadding(new Insets(5, 5, 5, 10));
                 Text text = new Text(message);
                 TextFlow txtflow = new TextFlow(text);
-                txtflow.setStyle("-fx-color: rgb(239, 242, 255); " + "-fx-background-color: rgb(15, 125, 242); " + "-fx-background-radius: 20px;");
+                txtflow.setStyle("-fx-color: rgb(239, 242, 255); " + "-fx-background-color: rgb(78, 2, 176); " + "-fx-background-radius: 20px;");
                 txtflow.setPadding(new Insets(5, 10, 5, 10));
                 text.setFill(Color.color(0.934, 0.945, 0.996));
                 hBox.getChildren().add(txtflow);
@@ -150,7 +150,7 @@ public class CustomerView implements Initializable {
                     hBox.setPadding(new Insets(5, 5, 5, 10));
                     Text text = new Text(message.getText());
                     TextFlow txtflow = new TextFlow(text);
-                    txtflow.setStyle("-fx-color: rgb(239, 242, 255); " + "-fx-background-color: rgb(15, 125, 242); " + "-fx-background-radius: 20px;");
+                    txtflow.setStyle("-fx-color: rgb(239, 242, 255); " + "-fx-background-color: rgb(78, 2, 176); " + "-fx-background-radius: 20px;");
                     txtflow.setPadding(new Insets(5, 10, 5, 10));
                     text.setFill(Color.color(0.934, 0.945, 0.996));
                     hBox.getChildren().add(txtflow);
@@ -510,24 +510,37 @@ public class CustomerView implements Initializable {
     }
 
     public void searchVideogame(){
+        boolean isValid = true;
         this.videogamesIndex = 0;
         this.resetVgButtons();
         this.currentVideogames.clear();
         int index = this.videogamesIndex*6;
         String option = this.videogamesFilterComboBox.getValue();
-        if(option != null) option = option.toLowerCase();
         String attribute = this.videogamesSearchField.getText();
-        ArrayList<Videogame> videogames;
-        if(inShop) videogames = this.videogameCtr.getby(option, attribute);
-        else videogames = this.videogameCtr.getby("customer_id/" + option, attribute + "/" + this.customer.getId());
-        int buttonsIndex = 0;
-        for(int i = index; i < index+6 && i < videogames.size();i++){
-            Button button = this.vgButtons.get(buttonsIndex);
-            Videogame videogame = videogames.get(i);
-            imageViews.get(buttonsIndex).setImage(new Image(videogame.getCover()));
-            button.setVisible(true);
-            this.currentVideogames.add(videogame);
-            buttonsIndex++;
+        if(option != null && !attribute.isBlank()) {
+            option = option.toLowerCase();
+            if ((option.equals("cost") || option.equals("stock"))) {
+                try {
+                    Double.parseDouble(attribute);
+                } catch (NumberFormatException e) {
+                    isValid = false;
+                    this.showMessageDialog("Search", "The value must be a number");
+                }
+            }
+            if (isValid) {
+                ArrayList<Videogame> videogames;
+                if (inShop) videogames = this.videogameCtr.getby(option, attribute);
+                else videogames = this.videogameCtr.getby("customer_id/" + option, attribute + "/" + this.customer.getId());
+                int buttonsIndex = 0;
+                for (int i = index; i < index + 6 && i < videogames.size(); i++) {
+                    Button button = this.vgButtons.get(buttonsIndex);
+                    Videogame videogame = videogames.get(i);
+                    imageViews.get(buttonsIndex).setImage(new Image(videogame.getCover()));
+                    button.setVisible(true);
+                    this.currentVideogames.add(videogame);
+                    buttonsIndex++;
+                }
+            }
         }
     }
 

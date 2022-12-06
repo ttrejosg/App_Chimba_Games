@@ -83,7 +83,7 @@
                 </VBox>
                 <StackPane fx:id="stackPane" layoutX="108.0" layoutY="71.0" prefHeight="518.0" prefWidth="857.0">
                     <children>
-                  <AnchorPane fx:id="chatPane" prefHeight="531.0" prefWidth="886.0" style="-fx-background-color: #131022; -fx-background-radius: 30;" stylesheets="@fullpackstyling.css" visible="false">
+                  <AnchorPane fx:id="chatPane" prefHeight="531.0" prefWidth="886.0" style="-fx-background-color: #131022; -fx-background-radius: 30;" stylesheets="@fullpackstyling.css">
                      <children>
                         <ScrollPane fx:id="spMain" layoutX="228.0" layoutY="67.0" prefHeight="382.0" prefWidth="615.0">
                            <content>
@@ -91,41 +91,47 @@
                            </content></ScrollPane>
                         <Pane layoutX="228.0" layoutY="22.0" prefHeight="46.0" prefWidth="615.0" style="-fx-background-color: rgb(25, 0, 57); -fx-background-radius: 30 30 0 0;">
                            <children>
-                              <Label fx:id="labelChat" layoutX="101.0" layoutY="15.0" prefHeight="17.0" prefWidth="411.0" text="User" textFill="#ffea0f" />
+                              <Label fx:id="labelChat" layoutX="101.0" layoutY="15.0" prefHeight="17.0" prefWidth="411.0" textFill="#ffea0f" />
                               <ImageView fx:id="chatIcon" fitHeight="34.0" fitWidth="34.0" layoutX="38.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true" />
                            </children>
                         </Pane>
-                        <ListView fx:id="friendsChaList" layoutX="14.0" layoutY="24.0" prefHeight="477.0" prefWidth="200.0" style="-fx-background-radius: 10; -fx-border-color: rgb(25, 0, 57); -fx-background-color: rgb(25, 0, 57);" />
+                        <ListView fx:id="friendsChaList" layoutX="14.0" layoutY="24.0" prefHeight="477.0" prefWidth="200.0" style="-fx-background-radius: 20; -fx-border-color: rgb(25, 0, 57); -fx-background-color: rgb(25, 0, 57);" />
                         <Pane layoutX="228.0" layoutY="449.0" prefHeight="52.0" prefWidth="615.0" style="-fx-background-color: rgb(25, 0, 57); -fx-background-radius: 0 0 30 30;">
                            <children>
-                              <Button layoutX="550.0" layoutY="11.0" mnemonicParsing="false" onAction="#send" prefHeight="31.0" prefWidth="47.0" style="-fx-text-fill: rgb(250, 250, 250);" styleClass="button2" text="Send" />
+                              <Button layoutX="550.0" layoutY="11.0" mnemonicParsing="false" onAction="#send" prefHeight="31.0" prefWidth="47.0" style="-fx-background-color: rgb(78, 2, 176);" styleClass="button2" text="Send" />
                               <TextField fx:id="inputMessage" layoutX="9.0" layoutY="11.0" prefHeight="31.0" prefWidth="530.0" style="-fx-background-color: rgb&amp;250, 250, 250); -fx-background-radius: 20;" />
                            </children>
                         </Pane>
                      </children>
                   </AnchorPane>
-                        <AnchorPane fx:id="videoGamePane" prefHeight="531.0" prefWidth="886.0" style="-fx-background-color: #131022; -fx-background-radius: 30;" stylesheets="@fullpackstyling.css">
+                        <AnchorPane fx:id="videoGamePane" prefHeight="518.0" prefWidth="262.0" style="-fx-background-color: #131022; -fx-background-radius: 30;" stylesheets="@fullpackstyling.css">
                             <children>
-                                <TextField fx:id="videogameNameField" layoutX="73.0" layoutY="68.0" prefHeight="26.0" prefWidth="174.0" promptText="Titulo" />
-                                <TextField fx:id="videogameStockField" layoutX="429.0" layoutY="81.0" prefHeight="19.0" prefWidth="135.0" promptText="stock" />
-                                <TextField fx:id="videogameTagField" layoutX="429.0" layoutY="144.0" prefHeight="19.0" prefWidth="135.0" promptText="tag" />
-                                <TextField fx:id="videogameDevsField" layoutX="607.0" layoutY="144.0" prefHeight="19.0" prefWidth="135.0" promptText="devs" />
-                                <TextField fx:id="videogameCostField" layoutX="607.0" layoutY="81.0" prefHeight="19.0" prefWidth="135.0" promptText="costo" />
-                                <TextArea fx:id="videogameDescriptionField" layoutX="411.0" layoutY="195.0" prefHeight="141.0" prefWidth="365.0" promptText="descripcion" />
-                                <Button fx:id="buyButton" layoutX="134.0" layoutY="368.0" mnemonicParsing="false" onAction="#buyVideogame" prefHeight="30.0" prefWidth="65.0" text="Buy">
+                                <TextField fx:id="videogameNameField" alignment="CENTER" layoutX="470.0" layoutY="146.0" prefHeight="27.0" prefWidth="236.0" promptText="Titulo" styleClass="textField" />
+                                <TextField fx:id="videogameStockField" alignment="CENTER" layoutX="403.0" layoutY="203.0" prefHeight="27.0" prefWidth="177.0" promptText="stock" styleClass="textField" />
+                                <TextField fx:id="videogameTagField" alignment="CENTER" layoutX="403.0" layoutY="256.0" prefHeight="27.0" prefWidth="177.0" promptText="tag" styleClass="textField" />
+                                <TextField fx:id="videogameDevsField" alignment="CENTER" layoutX="612.0" layoutY="256.0" prefHeight="27.0" prefWidth="159.0" promptText="devs" styleClass="textField" />
+                                <TextField fx:id="videogameCostField" alignment="CENTER" layoutX="612.0" layoutY="203.0" prefHeight="27.0" prefWidth="159.0" promptText="costo" styleClass="textField" />
+                                <TextArea fx:id="videogameDescriptionField" layoutX="403.0" layoutY="322.0" prefHeight="141.0" prefWidth="369.0" promptText="descripcion" />
+                                <Button fx:id="buyButton" layoutX="164.0" layoutY="463.0" mnemonicParsing="false" onAction="#buyVideogame" prefHeight="30.0" prefWidth="65.0" style="-fx-background-color: rgb(78, 2, 176);" styleClass="button2" text="Buy">
                                     <cursor>
                                         <Cursor fx:constant="HAND" />
                                     </cursor>
                                 </Button>
-                                <ImageView fx:id="formImageView" fitHeight="232.0" fitWidth="256.0" layoutX="34.0" layoutY="120.0" pickOnBounds="true" preserveRatio="true" />
-                        <Button layoutX="20.0" layoutY="14.0" mnemonicParsing="false" onAction="#backToGames" prefHeight="30.0" prefWidth="65.0" text="back">
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor>
-                        </Button>
+                                <ImageView fx:id="formImageView" fitHeight="298.0" fitWidth="301.0" layoutX="46.0" layoutY="148.0" pickOnBounds="true" preserveRatio="true" />
+                        <Label fx:id="contextLabel1" layoutX="21.0" layoutY="31.0" prefHeight="38.0" prefWidth="337.0" text="Compra de Videojuego :" textFill="WHITE">
+                           <font>
+                              <Font size="26.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="parragraphLabel1" layoutX="21.0" layoutY="87.0" text="Esta es toda la información acerca de este juego:" textFill="#ffea0f">
+                           <font>
+                              <Font size="13.0" />
+                           </font>
+                        </Label>
+                        <Pane layoutX="539.0" prefHeight="102.0" prefWidth="318.0" style="-fx-background-color: rgb(78, 2, 176); -fx-background-radius: 0 30 0 15;" />
                             </children>
                         </AnchorPane>
-                  <AnchorPane fx:id="shopPane" prefHeight="531.0" prefWidth="886.0" style="-fx-background-color: #131022; -fx-background-radius: 30;" stylesheets="@fullpackstyling.css" visible="false">
+                  <AnchorPane fx:id="shopPane" prefHeight="531.0" prefWidth="886.0" style="-fx-background-color: #131022; -fx-background-radius: 30;" stylesheets="@fullpackstyling.css">
                      <children>
                         <Label fx:id="contextLabel" layoutX="39.0" layoutY="34.0" prefHeight="38.0" prefWidth="174.0" text="Tienda :" textFill="WHITE">
                            <font>
@@ -185,7 +191,7 @@
                               <Cursor fx:constant="HAND" />
                            </cursor>
                         </Button>
-                        <Button layoutX="773.0" layoutY="264.0" mnemonicParsing="false" onAction="#nextPage" prefHeight="52.0" prefWidth="54.0" text="Button">
+                        <Button layoutX="773.0" layoutY="264.0" mnemonicParsing="false" onAction="#nextPage" prefHeight="52.0" prefWidth="54.0" style="-fx-background-color: rgb(78, 2, 176);" styleClass="button2">
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor>
@@ -201,14 +207,14 @@
                               <Cursor fx:constant="HAND" />
                            </cursor>
                         </Button>
-                        <Button layoutX="20.0" layoutY="261.0" mnemonicParsing="false" onAction="#lastPage" prefHeight="52.0" prefWidth="54.0" text="Button">
+                        <Button layoutX="20.0" layoutY="261.0" mnemonicParsing="false" onAction="#lastPage" prefHeight="52.0" prefWidth="54.0" style="-fx-background-color: rgb(78, 2, 176);" styleClass="button2">
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor>
                         </Button>
                      </children>
                   </AnchorPane>
-                        <AnchorPane fx:id="profilePane" prefHeight="531.0" prefWidth="886.0" style="-fx-background-color: #131022; -fx-background-radius: 30;" stylesheets="@fullpackstyling.css" visible="false">
+                        <AnchorPane fx:id="profilePane" prefHeight="531.0" prefWidth="886.0" style="-fx-background-color: #131022; -fx-background-radius: 30;" stylesheets="@fullpackstyling.css">
                             <children>
                                 <Label layoutX="39.0" layoutY="34.0" text="Profile  :" textFill="WHITE">
                                     <font>
@@ -220,39 +226,51 @@
                                         <Font size="13.0" />
                                     </font>
                                 </Label>
-                        <TextField fx:id="inName" layoutX="29.0" layoutY="197.0" prefHeight="25.0" prefWidth="111.0" promptText="Name*" />
-                        <TextField fx:id="inLastname" layoutX="172.0" layoutY="197.0" prefHeight="25.0" prefWidth="143.0" promptText="Lastname*" />
-                        <TextField fx:id="inUsername" layoutX="29.0" layoutY="138.0" prefHeight="25.0" prefWidth="111.0" promptText="Username*" />
-                        <TextField fx:id="inPassword" layoutX="172.0" layoutY="138.0" prefHeight="25.0" prefWidth="203.0" promptText="Password*" />
-                        <TextField fx:id="inAge" layoutX="326.0" layoutY="197.0" prefHeight="25.0" prefWidth="46.0" promptText="Age*" />
-                        <TextField fx:id="inEmail" layoutX="172.0" layoutY="259.0" prefHeight="25.0" prefWidth="203.0" promptText="Email*" />
-                        <TextField fx:id="inCellphone" layoutX="29.0" layoutY="259.0" prefHeight="25.0" prefWidth="111.0" promptText="Cellphone*" />
-                        <TextArea fx:id="inDescription" layoutX="29.0" layoutY="311.0" prefHeight="124.0" prefWidth="348.0" promptText="Description" />
-                        <Button layoutX="28.0" layoutY="458.0" mnemonicParsing="false" onAction="#changueIcon" text="Changue Icon" />
-                        <Button layoutX="172.0" layoutY="458.0" mnemonicParsing="false" onAction="#save" text="Save" />
-                        <Button layoutX="270.0" layoutY="458.0" mnemonicParsing="false" onAction="#setOnline" text="Set Online" />
-                        <ListView fx:id="friendsList" layoutX="417.0" layoutY="138.0" prefHeight="353.0" prefWidth="187.0" />
+                        <TextField fx:id="inName" layoutX="29.0" layoutY="197.0" prefHeight="25.0" prefWidth="111.0" promptText="Name*" styleClass="textField" />
+                        <TextField fx:id="inLastname" layoutX="172.0" layoutY="197.0" prefHeight="25.0" prefWidth="143.0" promptText="Lastname*" styleClass="textField" />
+                        <TextField fx:id="inUsername" layoutX="29.0" layoutY="138.0" prefHeight="25.0" prefWidth="111.0" promptText="Username*" styleClass="textField" />
+                        <TextField fx:id="inPassword" layoutX="172.0" layoutY="138.0" prefHeight="25.0" prefWidth="203.0" promptText="Password*" styleClass="textField" />
+                        <TextField fx:id="inAge" layoutX="326.0" layoutY="197.0" prefHeight="25.0" prefWidth="46.0" promptText="Age*" styleClass="textField" />
+                        <TextField fx:id="inEmail" layoutX="172.0" layoutY="259.0" prefHeight="25.0" prefWidth="203.0" promptText="Email*" styleClass="textField" />
+                        <TextField fx:id="inCellphone" layoutX="29.0" layoutY="259.0" prefHeight="25.0" prefWidth="111.0" promptText="Cellphone*" styleClass="textField" />
+                        <TextArea fx:id="inDescription" layoutX="29.0" layoutY="311.0" prefHeight="124.0" prefWidth="348.0" promptText="Description" style="-fx-background-color: rgb(100, 100, 100);" styleClass="button2" />
+                        <Button layoutX="28.0" layoutY="458.0" mnemonicParsing="false" onAction="#changueIcon" style="-fx-background-color: rgb(78, 2, 176);" styleClass="button2" text="Changue Icon">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor></Button>
+                        <Button layoutX="172.0" layoutY="458.0" mnemonicParsing="false" onAction="#save" style="-fx-background-color: rgb(78, 2, 176);" styleClass="button2" text="Save">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor></Button>
+                        <Button layoutX="270.0" layoutY="458.0" mnemonicParsing="false" onAction="#setOnline" style="-fx-background-color: rgb(78, 2, 176);" styleClass="button2" text="Set Online">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor></Button>
+                        <ListView fx:id="friendsList" layoutX="417.0" layoutY="138.0" prefHeight="353.0" prefWidth="187.0" style="-fx-background-color: rgb(78, 2, 176);" styleClass="button2" />
                         <Label layoutX="435.0" layoutY="90.0" text="My Friends" textFill="WHITE">
                            <font>
                               <Font size="26.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="searchFriend" layoutX="666.0" layoutY="93.0" prefHeight="25.0" prefWidth="128.0" promptText="Buscar" />
-                        <Button layoutX="700.0" layoutY="138.0" mnemonicParsing="false" onAction="#addFriend" text="Añadir amigo" />
-                        <TextField fx:id="frName" editable="false" layoutX="650.0" layoutY="185.0" prefHeight="25.0" prefWidth="187.0" promptText="Name" />
-                        <TextField fx:id="frLastname" editable="false" layoutX="650.0" layoutY="234.0" prefHeight="25.0" prefWidth="187.0" promptText="Lastname" />
+                        <TextField fx:id="searchFriend" layoutX="666.0" layoutY="93.0" prefHeight="25.0" prefWidth="128.0" promptText="Buscar" styleClass="combo-box" />
+                        <Button layoutX="700.0" layoutY="138.0" mnemonicParsing="false" onAction="#addFriend" style="-fx-background-color: rgb(78, 2, 176);" styleClass="button2" text="Añadir amigo">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor></Button>
+                        <TextField fx:id="frName" editable="false" layoutX="650.0" layoutY="185.0" prefHeight="25.0" prefWidth="187.0" promptText="Name" styleClass="textField" />
+                        <TextField fx:id="frLastname" editable="false" layoutX="650.0" layoutY="234.0" prefHeight="25.0" prefWidth="187.0" promptText="Lastname" styleClass="textField" />
                         <Button layoutX="804.0" layoutY="87.0" mnemonicParsing="false" onAction="#searchCustomer" prefHeight="38.0" prefWidth="46.0" style="-fx-background-color: #131022;">
                            <graphic>
                               <ImageView fitHeight="37.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../Images/icons8_Play_48px.png" />
+                                    <Image url="@../Images/icons8_Search_52px.png" />
                                  </image>
                               </ImageView>
                            </graphic>
                         </Button>
-                        <TextField fx:id="frAge" editable="false" layoutX="780.0" layoutY="284.0" prefHeight="25.0" prefWidth="54.0" promptText="Age" />
-                        <TextField fx:id="frCellphone" editable="false" layoutX="650.0" layoutY="284.0" promptText="Cellphone" />
-                        <TextField fx:id="frEmail" editable="false" layoutX="650.0" layoutY="336.0" prefHeight="25.0" prefWidth="187.0" promptText="Email" />
+                        <TextField fx:id="frAge" editable="false" layoutX="780.0" layoutY="284.0" prefHeight="25.0" prefWidth="54.0" promptText="Age" styleClass="textField" />
+                        <TextField fx:id="frCellphone" editable="false" layoutX="650.0" layoutY="284.0" promptText="Cellphone" styleClass="textField" />
+                        <TextField fx:id="frEmail" editable="false" layoutX="650.0" layoutY="336.0" prefHeight="25.0" prefWidth="187.0" promptText="Email" styleClass="textField" />
                         <TextArea fx:id="frDescription" editable="false" layoutX="648.0" layoutY="377.0" prefHeight="114.0" prefWidth="187.0" promptText="Description" />
                         <Separator layoutX="622.0" layoutY="113.0" orientation="VERTICAL" prefHeight="382.0" prefWidth="6.0" style="-fx-background-color: #ffea0f;" />
                         <Separator layoutX="399.0" layoutY="113.0" orientation="VERTICAL" prefHeight="382.0" prefWidth="6.0" style="-fx-background-color: #ffea0f;" />

@@ -251,22 +251,35 @@ public class AdminView implements Initializable {
     }
 
     public void searchVideogame(){
+        boolean isValid = true;
         this.videogamesIndex = 0;
         this.resetVgButtons();
         this.currentVideogames.clear();
         int index = this.videogamesIndex*5;
         String option = this.videogamesFilterComboBox.getValue();
-        if(option != null) option = option.toLowerCase();
         String attribute = this.videogamesSearchField.getText();
-        ArrayList<Videogame> videogames = this.videogameCtr.getby(option, attribute);
-        int buttonsIndex = 0;
-        for(int i = index; i < index+5 && i < videogames.size();i++){
-            Button button = this.vgButtons.get(buttonsIndex);
-            Videogame videogame = videogames.get(i);
-            imageViews.get(buttonsIndex).setImage(new Image(videogame.getCover()));
-            button.setVisible(true);
-            this.currentVideogames.add(videogame);
-            buttonsIndex++;
+        if(option != null && !attribute.isBlank()){
+            option = option.toLowerCase();
+            if((option.equals("cost") || option.equals("stock"))){
+                try{
+                    Double.parseDouble(attribute);
+                }catch (NumberFormatException e){
+                    isValid = false;
+                    this.showMessageDialog("Search","The value must be a number");
+                }
+            }
+            if(isValid){
+                ArrayList<Videogame> videogames = this.videogameCtr.getby(option, attribute);
+                int buttonsIndex = 0;
+                for(int i = index; i < index+5 && i < videogames.size();i++){
+                    Button button = this.vgButtons.get(buttonsIndex);
+                    Videogame videogame = videogames.get(i);
+                    imageViews.get(buttonsIndex).setImage(new Image(videogame.getCover()));
+                    button.setVisible(true);
+                    this.currentVideogames.add(videogame);
+                    buttonsIndex++;
+                }
+            }
         }
     }
 
@@ -394,7 +407,6 @@ public class AdminView implements Initializable {
         this.service = service;
         this.customerCtr.setService(service);
         this.videogameCtr.setService(service);
-        indexVideoGames();
     }
 
     public void showMessageDialog(String tittle,String text){

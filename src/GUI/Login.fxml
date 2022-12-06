@@ -12,16 +12,16 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" fx:id="scenePane" prefHeight="503.0" prefWidth="854.0" style="-fx-background-color: rgb(0,0,0); -fx-background-radius: 30;" stylesheets="@StyleLogin.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.Login">
+<AnchorPane id="AnchorPane" fx:id="scenePane" prefHeight="476.0" prefWidth="841.0" style="-fx-background-color: rgb(0,0,0); -fx-background-radius: 30;" stylesheets="@fullpackstyling.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.Login">
    <children>
-      <ImageView fitHeight="503.0" fitWidth="387.0" pickOnBounds="true">
+      <ImageView fitHeight="485.0" fitWidth="387.0" layoutY="-2.0" pickOnBounds="true">
          <image>
             <Image url="@../Images/fond.jpg" />
          </image>
       </ImageView>
-      <AnchorPane layoutX="383.0" layoutY="6.0" prefHeight="491.0" prefWidth="458.0" style="-fx-background-color: rgb(1, 7, 100 ); -fx-background-radius: 30;" AnchorPane.bottomAnchor="6.0" AnchorPane.leftAnchor="383.0" AnchorPane.topAnchor="6.0">
+      <AnchorPane layoutX="383.0" layoutY="2.0" prefHeight="483.0" prefWidth="458.0" style="-fx-background-color: #131022; -fx-background-radius: 30;" stylesheets="@fullpackstyling.css" AnchorPane.bottomAnchor="-2.0" AnchorPane.leftAnchor="383.0" AnchorPane.topAnchor="2.0">
          <children>
-            <Button layoutX="426.0" layoutY="1.0" mnemonicParsing="false" onAction="#close" text="Exit">
+            <Button layoutX="389.0" layoutY="10.0" mnemonicParsing="false" onAction="#close" prefHeight="35.0" prefWidth="57.0" styleClass="button2" stylesheets="@fullpackstyling.css" text="Exit">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor></Button>
@@ -54,7 +54,7 @@
                <children>
                   <TextField fx:id="changePasswordUsernameField" layoutX="31.0" layoutY="105.0" prefHeight="34.0" prefWidth="275.0" promptText="username or email" styleClass="textField" />
                   <PasswordField fx:id="changePasswordField" layoutX="31.0" layoutY="218.0" prefHeight="34.0" prefWidth="275.0" promptText="password" styleClass="textField" />
-                  <Button layoutX="35.0" layoutY="287.0" mnemonicParsing="false" onAction="#validateChangePassword" prefHeight="34.0" prefWidth="275.0" stylesheets="@StyleLogin.css" text="Change">
+                  <Button layoutX="35.0" layoutY="287.0" mnemonicParsing="false" onAction="#validateChangePassword" prefHeight="34.0" prefWidth="275.0" stylesheets="@fullpackstyling.css" text="Change">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor></Button>
@@ -64,17 +64,17 @@
                      </font>
                   </Label>
                   <TextField fx:id="changePasswordCellphoneField" layoutX="33.0" layoutY="161.0" prefHeight="34.0" prefWidth="275.0" promptText="cellphone" styleClass="textField" />
-                  <Button layoutX="8.0" layoutY="12.0" mnemonicParsing="false" onAction="#back" stylesheets="@StyleLogin.css" text="Back">
+                  <Button layoutX="8.0" layoutY="12.0" mnemonicParsing="false" onAction="#back" stylesheets="@fullpackstyling.css" text="Back">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor></Button>
                </children>
             </Pane>
-            <Pane fx:id="logIn" layoutX="64.0" layoutY="66.0" prefHeight="371.0" prefWidth="345.0" style="-fx-background-color: rgb(0, 51, 255 ); -fx-background-radius: 30;" AnchorPane.bottomAnchor="66.0" AnchorPane.topAnchor="66.0">
+            <Pane fx:id="logIn" layoutX="64.0" layoutY="66.0" prefHeight="356.0" prefWidth="345.0" style="-fx-background-color: rgb(78, 2, 176); -fx-background-radius: 30;" AnchorPane.bottomAnchor="61.0" AnchorPane.topAnchor="66.0">
                <children>
                   <TextField fx:id="inUserName" layoutX="31.0" layoutY="77.0" prefHeight="34.0" prefWidth="275.0" promptText="username or email" style="-fx-border-color: rgb(250, 250, 250); -fx-background-color: trasnparente; -fx-border-width: 0px 0px 2px 0px; -fx-text-fill: #FFFFFF;" styleClass="textField" />
                   <PasswordField fx:id="inPassword" layoutX="31.0" layoutY="138.0" prefHeight="34.0" prefWidth="275.0" promptText="password" styleClass="textField" />
-                  <Button fx:id="btnSignin" layoutX="169.0" layoutY="202.0" mnemonicParsing="false" onAction="#validateSignIn" prefHeight="34.0" prefWidth="137.0" stylesheets="@StyleLogin.css" text="Sign in">
+                  <Button fx:id="btnSignin" layoutX="169.0" layoutY="202.0" mnemonicParsing="false" onAction="#validateSignIn" prefHeight="34.0" prefWidth="137.0" style="-fx-background-color: rgb(57, 4, 156);" styleClass="button2" stylesheets="@fullpackstyling.css" text="Sign in">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor></Button>
@@ -82,8 +82,11 @@
                      <font>
                         <Font name="Segoe UI" size="12.0" />
                      </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
                   </Label>
-                  <Button fx:id="btnSignup" layoutX="40.0" layoutY="299.0" mnemonicParsing="false" onAction="#changeToSingUp" prefHeight="34.0" prefWidth="275.0" stylesheets="@StyleLogin.css" text="Sign up">
+                  <Button fx:id="btnSignup" layoutX="40.0" layoutY="299.0" mnemonicParsing="false" onAction="#changeToSingUp" prefHeight="34.0" prefWidth="275.0" style="-fx-background-color: rgb(57, 4, 156);" styleClass="button2" stylesheets="@fullpackstyling.css" text="Sign up">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor></Button>
